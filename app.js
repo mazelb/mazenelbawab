@@ -43,15 +43,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('Service Worker: Registered successfully');
-                })
-                .catch((error) => {
-                    console.log('Service Worker: Registration failed', error);
-                });
-        });
+        // Only register service worker on http/https (not file://)
+        if (window.location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker: Registered successfully');
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker: Registration failed', error);
+                    });
+            });
+        }
     }
 }
 

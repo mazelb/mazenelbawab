@@ -4,16 +4,15 @@
 
 const CACHE_NAME = 'portfolio-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/about.html',
-    '/experience.html',
-    '/blog.html',
-    '/projects.html',
-    '/contact.html',
-    '/styles.css',
-    '/config.js',
-    '/app.js'
+    './index.html',
+    './about.html',
+    './experience.html',
+    './blog.html',
+    './projects.html',
+    './contact.html',
+    './styles.css',
+    './config.js',
+    './app.js'
 ];
 
 // Install event - cache all assets
@@ -72,7 +71,7 @@ self.addEventListener('fetch', (event) => {
             .catch(() => {
                 // Return offline page if available
                 if (event.request.mode === 'navigate') {
-                    return caches.match('/index.html');
+                    return caches.match('./index.html') || caches.match('index.html');
                 }
             })
     );
