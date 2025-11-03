@@ -623,14 +623,35 @@ footer a:hover {
    MULTI-PAGE ENHANCEMENTS
    ======================================== */
 
-/* Page transitions for smooth loading */
-body {
-    opacity: 1;
-    transition: opacity 0.15s ease-in-out;
+/* Tab System */
+.tab-content-container {
+    min-height: 70vh;
 }
 
-body.page-transitioning {
-    opacity: 0;
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tab Navigation */
+.tab-nav .tab-link {
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 /* Active navigation state */
@@ -643,6 +664,7 @@ nav a.active {
 /* Page content styling */
 .page-content {
     min-height: 60vh;
+    padding: var(--spacing-lg) 0;
 }
 
 .page-title {
@@ -705,7 +727,7 @@ footer p + p {
     opacity: 0.8;
 }
 
-/* Prefetch optimization hints */
+/* Smooth transitions */
 @media (prefers-reduced-motion: no-preference) {
     html {
         scroll-behavior: smooth;

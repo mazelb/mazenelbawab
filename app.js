@@ -3,60 +3,23 @@
 // ========================================
 
 // ========================================
-// PAGE DETECTION & ROUTING
-// ========================================
-const CURRENT_PAGE = getCurrentPage();
-
-function getCurrentPage() {
-    const path = window.location.pathname;
-    const page = path.substring(path.lastIndexOf('/') + 1);
-    
-    if (!page || page === 'index.html') return 'home';
-    return page.replace('.html', '');
-}
-
-// ========================================
 // INITIALIZATION
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Add fade-in effect
-    document.body.style.opacity = '1';
-    
     initializeGoogleAnalytics();
     initializePersonalInfo();
     initializeFeatures();
-    initializePageTransitions();
-    registerServiceWorker();
+    initializeTabs();
     
-    // Page-specific initialization
-    if (CURRENT_PAGE === 'blog') {
+    // Load blog and projects data (but don't show until tab is activated)
+    if (CONFIG.features.showBlog) {
         fetchMediumPosts();
     }
     
-    if (CURRENT_PAGE === 'projects') {
+    if (CONFIG.features.showProjects) {
         fetchGitHubRepos();
     }
 });
-
-// ========================================
-// SERVICE WORKER REGISTRATION
-// ========================================
-function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        // Only register service worker on http/https (not file://)
-        if (window.location.protocol !== 'file:') {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then((registration) => {
-                        console.log('Service Worker: Registered successfully');
-                    })
-                    .catch((error) => {
-                        console.log('Service Worker: Registration failed', error);
-                    });
-            });
-        }
-    }
-}
 
 // ========================================
 // GOOGLE ANALYTICS INITIALIZATION
@@ -194,41 +157,60 @@ function initializeFeatures() {
 }
 
 // ========================================
-// PAGE TRANSITIONS
+// TAB SYSTEM
 // ========================================
-function initializePageTransitions() {
-    // Add smooth transitions for all internal links
-    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+function initializeTabs() {
+    // Get all tab links
+    const tabLinks = document.querySelectorAll('.tab-link');
+    
+    // Add click event to each tab link
+    tabLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Only handle internal page links
-            if (href && !this.target && !href.startsWith('http')) {
-                e.preventDefault();
-                
-                // Fade out
-                document.body.style.opacity = '0';
-                
-                // Navigate after fade
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 150);
+            e.preventDefault();
+            const tabName = this.getAttribute('data-tab');
+            if (tabName) {
+                switchTab(tabName);
             }
         });
     });
     
-    // Prefetch pages on hover for instant loading
-    document.querySelectorAll('a[href$=".html"]').forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            const href = this.getAttribute('href');
-            if (href && !href.startsWith('http')) {
-                const prefetchLink = document.createElement('link');
-                prefetchLink.rel = 'prefetch';
-                prefetchLink.href = href;
-                document.head.appendChild(prefetchLink);
-            }
-        });
+    // Check URL hash for initial tab
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        switchTab(hash);
+    }
+}
+
+function switchTab(tabName) {
+    // Hide all tab contents
+    const allTabs = document.querySelectorAll('.tab-content');
+    allTabs.forEach(tab => {
+        tab.classList.remove('active');
     });
+    
+    // Remove active class from all tab links
+    const allLinks = document.querySelectorAll('.tab-link');
+    allLinks.forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Show selected tab
+    const selectedTab = document.getElementById(`${tabName}-tab`);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+        
+        // Add active class to corresponding nav link
+        const activeLink = document.querySelector(`.tab-link[data-tab="${tabName}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+        
+        // Update URL hash without scrolling
+        history.replaceState(null, null, `#${tabName}`);
+        
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 // ========================================

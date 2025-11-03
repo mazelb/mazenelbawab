@@ -23,8 +23,8 @@ const CONFIG = {
     // Set to true/false to show/hide sections
     // ========================================
     features: {
-        showBlog: false,        // Toggle Medium blog section
-        showProjects: false,    // Toggle GitHub projects section
+        showBlog: true,        // Toggle Medium blog section
+        showProjects: true,    // Toggle GitHub projects section
         showResume: true       // Toggle resume download option
     },
 
