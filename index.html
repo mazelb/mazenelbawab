@@ -17,6 +17,11 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
     
+    <!-- Prefetch other pages for instant navigation -->
+    <link rel="prefetch" href="about.html">
+    <link rel="prefetch" href="experience.html">
+    <link rel="prefetch" href="contact.html">
+    
     <!-- Google Analytics - Will be initialized by app.js -->
     <script id="google-analytics-script"></script>
     
@@ -30,14 +35,15 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#" class="logo">ME</a>
+            <a href="index.html" class="logo">ME</a>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
             <ul id="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li id="nav-blog" class="hidden"><a href="#blog">Blog</a></li>
-                <li id="nav-projects" class="hidden"><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li id="nav-blog" class="hidden"><a href="blog.html">Blog</a></li>
+                <li id="nav-projects" class="hidden"><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li id="nav-resume" class="hidden"><a id="nav-resume-link" href="#" download>Resume</a></li>
             </ul>
         </div>
@@ -49,129 +55,32 @@
             <h1 id="hero-name"></h1>
             <p class="tagline" id="hero-tagline"></p>
             <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="contact.html" class="btn btn-primary">Get In Touch</a>
                 <a id="hero-linkedin" href="#" target="_blank" class="btn btn-secondary">LinkedIn</a>
                 <a id="hero-resume" href="#" download class="btn btn-secondary hidden">📄 Resume</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
+    <!-- Quick Links Section -->
+    <section id="quick-links" class="quick-links-section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content" id="about-content"></div>
-        </div>
-    </section>
-
-    <!-- Blog Section (Medium Integration) -->
-    <section id="blog" class="hidden">
-        <div class="container">
-            <h2 class="section-title">Latest Articles</h2>
-            <p class="section-subtitle">Recent posts from my Medium blog</p>
-            <div id="blog-loading" class="spinner"></div>
-            <div id="blog-error" class="error-message hidden"></div>
-            <div id="blog-empty" class="empty-state hidden">No blog posts found</div>
-            <div id="blog-grid" class="blog-grid"></div>
-        </div>
-    </section>
-
-    <!-- Projects Section (GitHub Integration) -->
-    <section id="projects" class="hidden">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Open source contributions and personal projects</p>
-            <div id="projects-loading" class="spinner"></div>
-            <div id="projects-error" class="error-message hidden"></div>
-            <div id="projects-empty" class="empty-state hidden">No projects found</div>
-            <div id="projects-grid" class="projects-grid"></div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <p class="section-subtitle">Key roles that shaped my engineering leadership journey</p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Director of Engineering</h3>
-                        <p class="timeline-company">Ubisoft</p>
-                        <p class="timeline-period">2024 - Present</p>
-                        <p>Leading 100+ global engineers across Montreal, Kyiv, Winnipeg, and Toronto for Rainbow Six Mobile. Driving cross-studio collaboration, reorganizing engineering org for better execution, and championing AI integration to boost developer productivity.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Senior Engineering Manager</h3>
-                        <p class="timeline-company">Brex</p>
-                        <p class="timeline-period">2021 - 2024</p>
-                        <p>Led 20+ engineers scaling Brex's global card platform. Rebuilt card issuance infrastructure, reduced third-party dependencies saving $2.7M annually, and managed key Mastercard partnerships.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Senior Engineering Manager</h3>
-                        <p class="timeline-company">Ubisoft</p>
-                        <p class="timeline-period">2017 - 2021</p>
-                        <p>Led 30+ cross-functional engineers for Rainbow Six Siege across multiple studios. Oversaw partnerships with Microsoft, Sony, and Audio Kinetic. Applied AI analytics for player behavior modeling.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Founder & CTO</h3>
-                        <p class="timeline-company">Heddoko</p>
-                        <p class="timeline-period">2012 - 2017</p>
-                        <p>Founded and led ML-driven development of real-time motion analytics wearables. Secured $1.5M seed funding, grew team to 20+ people. Techstars alumni, featured in TechCrunch, CES 2016, and NFL's First & Future program.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Senior Software Engineer</h3>
-                        <p class="timeline-company">Ubisoft</p>
-                        <p class="timeline-period">2009 - 2012</p>
-                        <p>Pioneered Kinect game engine development, leading team of 12 engineers. Released "Your Shape Fitness 2012," "Michael Jackson the Experience," and "Just Dance Kinect" for Xbox 360.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-content">
-                <p>I'm always open to discussing new opportunities, collaborations, or just connecting with fellow engineering leaders and innovators.</p>
-                
-                <div class="contact-links">
-                    <a id="contact-email" href="#" class="contact-link">
-                        <span>📧</span> <span id="contact-email-text"></span>
-                    </a>
-                    <a id="contact-linkedin" href="#" target="_blank" class="contact-link">
-                        <span>💼</span> LinkedIn
-                    </a>
-                    <a id="contact-github" href="#" target="_blank" class="contact-link">
-                        <span>💻</span> GitHub
-                    </a>
-                    <a id="contact-phone" href="#" class="contact-link">
-                        <span>📱</span> <span id="contact-phone-text"></span>
-                    </a>
-                    <a id="contact-resume" href="#" download class="contact-link hidden">
-                        <span>📄</span> <span id="contact-resume-text"></span>
-                    </a>
-                </div>
+            <div class="quick-links-grid">
+                <a href="about.html" class="quick-link-card">
+                    <div class="quick-link-icon">👤</div>
+                    <h3>About Me</h3>
+                    <p>Learn about my journey and expertise</p>
+                </a>
+                <a href="experience.html" class="quick-link-card">
+                    <div class="quick-link-icon">💼</div>
+                    <h3>Experience</h3>
+                    <p>18 years across gaming, fintech & wearables</p>
+                </a>
+                <a href="contact.html" class="quick-link-card">
+                    <div class="quick-link-icon">📧</div>
+                    <h3>Get In Touch</h3>
+                    <p>Let's discuss opportunities</p>
+                </a>
             </div>
         </div>
     </section>

@@ -3,21 +3,57 @@
 // ========================================
 
 // ========================================
+// PAGE DETECTION & ROUTING
+// ========================================
+const CURRENT_PAGE = getCurrentPage();
+
+function getCurrentPage() {
+    const path = window.location.pathname;
+    const page = path.substring(path.lastIndexOf('/') + 1);
+    
+    if (!page || page === 'index.html') return 'home';
+    return page.replace('.html', '');
+}
+
+// ========================================
 // INITIALIZATION
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Add fade-in effect
+    document.body.style.opacity = '1';
+    
     initializeGoogleAnalytics();
     initializePersonalInfo();
     initializeFeatures();
+    initializePageTransitions();
+    registerServiceWorker();
     
-    if (CONFIG.features.showBlog) {
+    // Page-specific initialization
+    if (CURRENT_PAGE === 'blog') {
         fetchMediumPosts();
     }
     
-    if (CONFIG.features.showProjects) {
+    if (CURRENT_PAGE === 'projects') {
         fetchGitHubRepos();
     }
 });
+
+// ========================================
+// SERVICE WORKER REGISTRATION
+// ========================================
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker: Registered successfully');
+                })
+                .catch((error) => {
+                    console.log('Service Worker: Registration failed', error);
+                });
+        });
+    }
+}
 
 // ========================================
 // GOOGLE ANALYTICS INITIALIZATION
@@ -62,47 +98,64 @@ function initializeGoogleAnalytics() {
 // PERSONAL INFO INITIALIZATION
 // ========================================
 function initializePersonalInfo() {
-    // Hero section
-    document.getElementById('hero-name').textContent = CONFIG.personal.name;
-    document.getElementById('hero-tagline').textContent = CONFIG.personal.tagline;
-    document.getElementById('hero-linkedin').href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
+    // Hero section (only on home page)
+    const heroName = document.getElementById('hero-name');
+    const heroTagline = document.getElementById('hero-tagline');
+    const heroLinkedin = document.getElementById('hero-linkedin');
+    
+    if (heroName) heroName.textContent = CONFIG.personal.name;
+    if (heroTagline) heroTagline.textContent = CONFIG.personal.tagline;
+    if (heroLinkedin) heroLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
     
     // About section
     const aboutContent = document.getElementById('about-content');
-    CONFIG.about.forEach(paragraph => {
-        const p = document.createElement('p');
-        p.textContent = paragraph;
-        aboutContent.appendChild(p);
-    });
+    if (aboutContent) {
+        CONFIG.about.forEach(paragraph => {
+            const p = document.createElement('p');
+            p.textContent = paragraph;
+            aboutContent.appendChild(p);
+        });
+    }
     
     // Contact section
-    document.getElementById('contact-email').href = `mailto:${CONFIG.personal.email}`;
-    document.getElementById('contact-email-text').textContent = CONFIG.personal.email;
-    document.getElementById('contact-linkedin').href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
-    document.getElementById('contact-github').href = `https://github.com/${CONFIG.personal.github}`;
-    document.getElementById('contact-phone').href = `tel:${CONFIG.personal.phone}`;
-    document.getElementById('contact-phone-text').textContent = CONFIG.personal.phone;
+    const contactEmail = document.getElementById('contact-email');
+    const contactEmailText = document.getElementById('contact-email-text');
+    const contactLinkedin = document.getElementById('contact-linkedin');
+    const contactGithub = document.getElementById('contact-github');
+    const contactPhone = document.getElementById('contact-phone');
+    const contactPhoneText = document.getElementById('contact-phone-text');
+    
+    if (contactEmail) contactEmail.href = `mailto:${CONFIG.personal.email}`;
+    if (contactEmailText) contactEmailText.textContent = CONFIG.personal.email;
+    if (contactLinkedin) contactLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
+    if (contactGithub) contactGithub.href = `https://github.com/${CONFIG.personal.github}`;
+    if (contactPhone) contactPhone.href = `tel:${CONFIG.personal.phone}`;
+    if (contactPhoneText) contactPhoneText.textContent = CONFIG.personal.phone;
     
     // Footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    document.getElementById('footer-name').textContent = CONFIG.personal.name;
-    document.getElementById('footer-location').textContent = CONFIG.personal.location;
+    const currentYear = document.getElementById('current-year');
+    const footerName = document.getElementById('footer-name');
+    const footerLocation = document.getElementById('footer-location');
+    
+    if (currentYear) currentYear.textContent = new Date().getFullYear();
+    if (footerName) footerName.textContent = CONFIG.personal.name;
+    if (footerLocation) footerLocation.textContent = CONFIG.personal.location;
 }
 
 // ========================================
 // FEATURE TOGGLES
 // ========================================
 function initializeFeatures() {
-    // Show/hide blog section
-    if (CONFIG.features.showBlog) {
-        document.getElementById('blog').classList.remove('hidden');
-        document.getElementById('nav-blog').classList.remove('hidden');
+    // Show/hide blog nav item
+    const navBlog = document.getElementById('nav-blog');
+    if (navBlog && CONFIG.features.showBlog) {
+        navBlog.classList.remove('hidden');
     }
     
-    // Show/hide projects section
-    if (CONFIG.features.showProjects) {
-        document.getElementById('projects').classList.remove('hidden');
-        document.getElementById('nav-projects').classList.remove('hidden');
+    // Show/hide projects nav item
+    const navProjects = document.getElementById('nav-projects');
+    if (navProjects && CONFIG.features.showProjects) {
+        navProjects.classList.remove('hidden');
     }
     
     // Show/hide resume download
@@ -119,7 +172,7 @@ function initializeFeatures() {
             navResume.classList.remove('hidden');
         }
         
-        // Hero button
+        // Hero button (home page only)
         const heroResume = document.getElementById('hero-resume');
         if (heroResume) {
             heroResume.href = resumeFilename;
@@ -135,6 +188,44 @@ function initializeFeatures() {
             contactResume.classList.remove('hidden');
         }
     }
+}
+
+// ========================================
+// PAGE TRANSITIONS
+// ========================================
+function initializePageTransitions() {
+    // Add smooth transitions for all internal links
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only handle internal page links
+            if (href && !this.target && !href.startsWith('http')) {
+                e.preventDefault();
+                
+                // Fade out
+                document.body.style.opacity = '0';
+                
+                // Navigate after fade
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 150);
+            }
+        });
+    });
+    
+    // Prefetch pages on hover for instant loading
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('http')) {
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = href;
+                document.head.appendChild(prefetchLink);
+            }
+        });
+    });
 }
 
 // ========================================

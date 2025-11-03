@@ -618,3 +618,111 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* ========================================
+   MULTI-PAGE ENHANCEMENTS
+   ======================================== */
+
+/* Page transitions for smooth loading */
+body {
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+}
+
+body.page-transitioning {
+    opacity: 0;
+}
+
+/* Active navigation state */
+nav a.active {
+    color: var(--secondary-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Page content styling */
+.page-content {
+    min-height: 60vh;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+/* Quick Links Section (Home Page) */
+.quick-links-section {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-white);
+}
+
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.quick-link-card {
+    background: var(--bg-white);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+    cursor: pointer;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary-color);
+}
+
+.quick-link-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.quick-link-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.quick-link-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Footer location styling */
+footer p + p {
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+/* Prefetch optimization hints */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    a {
+        transition: all 0.2s ease;
+    }
+}
+
+/* Responsive adjustments for page titles */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
