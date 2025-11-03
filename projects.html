@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mazen Elbawab - Projects and Open Source">
+    <title>Projects | Mazen Elbawab</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="prefetch" href="blog.html">
+    <link rel="prefetch" href="contact.html">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">ME</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li id="nav-blog" class="hidden"><a href="blog.html">Blog</a></li>
+                <li id="nav-projects" class="hidden"><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="nav-resume" class="hidden"><a id="nav-resume-link" href="#" download>Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="projects" class="page-content">
+        <div class="container">
+            <h1 class="page-title">Featured Projects</h1>
+            <p class="section-subtitle">Open source contributions and personal projects</p>
+            <div id="projects-loading" class="spinner"></div>
+            <div id="projects-error" class="error-message hidden"></div>
+            <div id="projects-empty" class="empty-state hidden">No projects found</div>
+            <div id="projects-grid" class="projects-grid"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> <span id="footer-name"></span>. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;" id="footer-location"></p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
