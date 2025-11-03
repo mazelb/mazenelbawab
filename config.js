@@ -48,6 +48,15 @@ const CONFIG = {
     },
 
     // ========================================
+    // CONTACT FORM (FORMSPREE)
+    // Sign up at https://formspree.io to get your form endpoint
+    // Replace YOUR_FORM_ID with your actual Formspree form ID
+    // ========================================
+    contactForm: {
+        formspreeId: "myzbqjrz"  // Get this from https://formspree.io after creating a form
+    },
+
+    // ========================================
     // MEDIUM BLOG INTEGRATION
     // ========================================
     medium: {

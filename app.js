@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePersonalInfo();
     initializeFeatures();
     initializeTabs();
+    initializeContactForm();
     
     // Load blog and projects data (but don't show until tab is activated)
     if (CONFIG.features.showBlog) {
@@ -227,6 +228,73 @@ document.querySelectorAll('nav a').forEach(link => {
         document.getElementById('nav-menu').classList.remove('active');
     });
 });
+
+// ========================================
+// CONTACT FORM
+// ========================================
+function initializeContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    
+    // Set form action from config
+    if (CONFIG.contactForm && CONFIG.contactForm.formspreeId) {
+        form.action = `https://formspree.io/f/${CONFIG.contactForm.formspreeId}`;
+    }
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const statusDiv = document.getElementById('form-status');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        
+        // Check if form is configured
+        if (!CONFIG.contactForm || !CONFIG.contactForm.formspreeId || CONFIG.contactForm.formspreeId === 'YOUR_FORM_ID') {
+            statusDiv.textContent = '⚠️ Contact form not configured. Please update the Formspree ID in config.js';
+            statusDiv.className = 'form-status error';
+            statusDiv.classList.remove('hidden');
+            return;
+        }
+        
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusDiv.classList.add('hidden');
+        
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                statusDiv.textContent = '✓ Thank you! Your message has been sent successfully.';
+                statusDiv.className = 'form-status success';
+                statusDiv.classList.remove('hidden');
+                form.reset();
+            } else {
+                // Error from server
+                statusDiv.textContent = '✗ Oops! There was a problem sending your message. Please try again.';
+                statusDiv.className = 'form-status error';
+                statusDiv.classList.remove('hidden');
+            }
+        } catch (error) {
+            // Network error
+            statusDiv.textContent = '✗ Network error. Please check your connection and try again.';
+            statusDiv.className = 'form-status error';
+            statusDiv.classList.remove('hidden');
+        } finally {
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        }
+    });
+}
 
 // ========================================
 // MEDIUM BLOG INTEGRATION
