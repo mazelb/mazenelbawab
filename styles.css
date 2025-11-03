@@ -1,37 +1,49 @@
 /* ========================================
-   CSS VARIABLES - EDIT THESE TO CUSTOMIZE
+   CSS VARIABLES (Tailwind-compatible Slate colors)
    ======================================== */
 :root {
-    /* Color Scheme */
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --accent-color: #e74c3c;
-    --success-color: #27ae60;
-    --text-color: #333;
-    --text-light: #6c757d;
-    --bg-light: #f8f9fa;
-    --bg-white: #ffffff;
-    --border-color: #dee2e6;
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
-    
-    /* Typography */
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-size-base: 16px;
-    --line-height-base: 1.6;
-    
-    /* Spacing */
+    /* Slate color palette */
+    --bg-color: #f8fafc;
+    --bg-light: #ffffff;
+    --text-color: #0f172a;
+    --text-muted: #64748b;
+    --primary-color: #3b82f6;
+    --secondary-color: #8b5cf6;
+    --accent-color: #06b6d4;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --border-radius: 0.5rem;
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 3rem;
-    --spacing-xl: 5rem;
-    
-    /* Layout */
-    --container-max-width: 1000px;
-    --border-radius: 8px;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
     --transition-speed: 0.3s;
+    
+    /* Backdrop blur */
+    --nav-bg: rgba(255, 255, 255, 0.7);
+    --nav-border: rgba(226, 232, 240, 0.6);
+}
+
+/* Dark mode variables */
+:root.dark {
+    --bg-color: #020617;
+    --bg-light: #0f172a;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --primary-color: #60a5fa;
+    --secondary-color: #a78bfa;
+    --accent-color: #22d3ee;
+    --border-color: #1e293b;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+    
+    /* Dark backdrop blur */
+    --nav-bg: rgba(15, 23, 42, 0.5);
+    --nav-border: rgba(30, 41, 59, 0.6);
 }
 
 /* ========================================
@@ -48,11 +60,13 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-base);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg-color);
     color: var(--text-color);
-    background: var(--bg-white);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -91,11 +105,15 @@ body {
    NAVIGATION
    ======================================== */
 nav {
-    background: var(--bg-white);
-    box-shadow: var(--shadow-sm);
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    border-bottom: 1px solid var(--nav-border);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 nav .container {
@@ -152,7 +170,48 @@ nav a:hover {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--primary-color);
+    color: var(--text-color);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.theme-toggle:hover {
+    background-color: var(--border-color);
+    transform: rotate(20deg);
+}
+
+.theme-icon {
+    transition: transform 0.3s ease;
+}
+
+:root.dark .theme-icon::before {
+    content: '☀️';
+}
+
+:root:not(.dark) .theme-icon::before {
+    content: '🌙';
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+}
+
+.theme-icon::before {
+    display: block;
 }
 
 /* ========================================
@@ -864,4 +923,102 @@ footer p + p {
     .quick-links-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ========================================
+   DARK MODE SPECIFIC ADJUSTMENTS
+   ======================================== */
+:root.dark {
+    color-scheme: dark;
+}
+
+:root.dark .hero {
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-color) 100%);
+}
+
+:root.dark .quick-link-card {
+    background: var(--bg-light);
+    border-color: var(--border-color);
+}
+
+:root.dark .quick-link-card:hover {
+    background: #1e293b;
+    border-color: var(--primary-color);
+}
+
+:root.dark .blog-card,
+:root.dark .project-card {
+    background: var(--bg-light);
+    border-color: var(--border-color);
+}
+
+:root.dark .blog-card:hover,
+:root.dark .project-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+:root.dark .timeline-marker {
+    background: var(--primary-color);
+    border-color: var(--bg-color);
+}
+
+:root.dark .timeline-content {
+    background: var(--bg-light);
+    border-color: var(--border-color);
+}
+
+:root.dark .contact-form-section,
+:root.dark .contact-link {
+    background: var(--bg-light);
+}
+
+:root.dark .form-group input,
+:root.dark .form-group textarea {
+    background: var(--bg-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+:root.dark .form-group input:focus,
+:root.dark .form-group textarea:focus {
+    border-color: var(--primary-color);
+}
+
+:root.dark footer {
+    background: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+}
+
+:root.dark .btn-primary {
+    background: var(--primary-color);
+    color: var(--bg-color);
+}
+
+:root.dark .btn-primary:hover {
+    background: #3b82f6;
+}
+
+:root.dark .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+:root.dark .btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+}
+
+/* Scrollbar for dark mode */
+:root.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+:root.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+:root.dark ::-webkit-scrollbar-track {
+    background: var(--bg-color);
 }

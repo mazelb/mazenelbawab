@@ -6,6 +6,7 @@
 // INITIALIZATION
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
     initializeGoogleAnalytics();
     initializePersonalInfo();
     initializeFeatures();
@@ -21,6 +22,38 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchGitHubRepos();
     }
 });
+
+// ========================================
+// THEME / DARK MODE
+// ========================================
+function initializeTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        htmlElement.classList.add('dark');
+    }
+    
+    // Theme toggle click handler
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+}
+
+function toggleTheme() {
+    const htmlElement = document.documentElement;
+    const isDark = htmlElement.classList.toggle('dark');
+    
+    // Save preference
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    // Optional: Add a subtle animation effect
+    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+}
 
 // ========================================
 // GOOGLE ANALYTICS INITIALIZATION
@@ -238,6 +271,9 @@ function switchTab(tabName) {
         
         // Scroll to top smoothly
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Dispatch custom event for AOS refresh
+        document.dispatchEvent(new CustomEvent('tabChanged'));
     }
 }
 

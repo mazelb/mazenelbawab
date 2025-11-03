@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mazen Elbawab — Engineering Leader</title>
+  <meta name="description" content="Engineering leader across Fintech, Gaming, and Wearables. Building scalable platforms, content systems, and AI tooling." />
+  <meta property="og:title" content="Mazen Elbawab — Engineering Leader" />
+  <meta property="og:description" content="Director of Engineering. Fintech x Gaming x AI. Systems at scale." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mazelb.github.io/" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif"] },
+          colors: { brand: { DEFAULT: '#2563eb', dark: '#1e3a8a' } },
+          boxShadow: { soft: '0 10px 30px rgba(2,6,23,0.06)' }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    /* Scrollbar (desktop) */
+    ::-webkit-scrollbar{width:12px}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:8px}::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+    /* Section top padding to offset sticky header */
+    section { scroll-margin-top: 88px; }
+    /* Reduce animation for users preferring reduced motion */
+    @media (prefers-reduced-motion: reduce){ [data-aos]{opacity:1 !important; transform:none !important; transition:none !important; } }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-white/70 dark:bg-slate-900/50 border-b border-slate-200/60 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="h-16 flex items-center justify-between">
+        <a href="#home" class="font-semibold tracking-tight text-lg">Mazen<span class="text-brand">.</span></a>
+        <nav id="nav" class="hidden md:flex gap-6 text-sm">
+          <a class="navlink py-2" href="#home">Home</a>
+          <a class="navlink py-2" href="#work">Work</a>
+          <a class="navlink py-2" href="#experience">Experience</a>
+          <a class="navlink py-2" href="#highlights">Highlights</a>
+          <a class="navlink py-2" href="#writing">Writing</a>
+          <a class="navlink py-2" href="#contact">Contact</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" aria-label="Toggle dark mode" class="rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs hover:bg-slate-100 dark:hover:bg-slate-800">🌙</button>
+          <button id="menuBtn" class="md:hidden p-2">☰</button>
+        </div>
+      </div>
+      <nav id="mobileNav" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm">
+          <a class="navlink py-2" href="#work">Work</a>
+          <a class="navlink py-2" href="#experience">Experience</a>
+          <a class="navlink py-2" href="#highlights">Highlights</a>
+          <a class="navlink py-2" href="#writing">Writing</a>
+          <a class="navlink py-2" href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="pt-28 md:pt-32">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-7" data-aos="fade-right">
+          <p class="uppercase tracking-widest text-xs text-brand/90 font-semibold">Engineering Leadership · Systems at Scale</p>
+          <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">
+            Mazen Elbawab
+          </h1>
+          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
+            Director of Engineering with 18+ years across Fintech, Gaming, and Wearables. I build high‑leverage teams, content systems, and AI‑assisted tooling that ship reliably at scale.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#work" class="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2 text-white shadow-soft hover:bg-brand/90">See my work →</a>
+            <a href="#contact" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800">Get in touch</a>
+          </div>
+          <div class="mt-6 text-sm text-slate-500 dark:text-slate-400">
+            ex‑Brex (Card Infra), Ubisoft (Rainbow Six Mobile & Siege), Heddoko (founder).
+          </div>
+        </div>
+        <div class="md:col-span-5" data-aos="fade-left">
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-2xl bg-gradient-to-br from-brand/10 to-slate-200 dark:from-brand/20 dark:to-slate-800 overflow-hidden shadow-soft">
+              <!-- Replace this with a photo -->
+              <div class="h-full w-full grid place-items-center text-slate-400 dark:text-slate-500">Your photo / logo</div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-soft" data-aos="zoom-in" data-aos-delay="200">
+              <div class="text-xs uppercase text-slate-500">Active Focus</div>
+              <div class="font-semibold">GenAI for productivity</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-soft">
+          <div class="text-3xl font-extrabold">100+ </div>
+          <div class="text-sm text-slate-500">Engineers led globally</div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border p-5 shadow-soft">
+          <div class="text-3xl font-extrabold">$MM+</div>
+          <div class="text-sm text-slate-500">Cost savings / new revenue</div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border p-5 shadow-soft">
+          <div class="text-3xl font-extrabold">3</div>
+          <div class="text-sm text-slate-500">Industries at scale</div>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border p-5 shadow-soft">
+          <div class="text-3xl font-extrabold">18+</div>
+          <div class="text-sm text-slate-500">Years building products</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold">Featured Work</h2>
+        <a href="#contact" class="text-sm underline underline-offset-4">Request full portfolio</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <article class="group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-soft" data-aos="fade-up">
+          <div class="aspect-video bg-slate-200/60 dark:bg-slate-800/60 grid place-items-center">Image</div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Rainbow Six Mobile — WW Launch Readiness</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Directed 100+ engineers across studios; built monetization/content pipelines; Unity upgrade strategy; stability-at-scale.
+            </p>
+            <div class="mt-3 text-xs text-slate-500">Leadership · Tooling · LiveOps</div>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="group rounded-2xl bg-white dark:bg-slate-900 border overflow-hidden shadow-soft" data-aos="fade-up" data-aos-delay="100">
+          <div class="aspect-video bg-slate-200/60 dark:bg-slate-800/60 grid place-items-center">Image</div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Brex — Card Infrastructure & Payments</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Global card issuing/processing, 3DS, contactless, FX revenue; millions in savings; partner mgmt with Mastercard.</p>
+            <div class="mt-3 text-xs text-slate-500">Fintech · Platforms</div>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="group rounded-2xl bg-white dark:bg-slate-900 border overflow-hidden shadow-soft" data-aos="fade-up" data-aos-delay="200">
+          <div class="aspect-video bg-slate-200/60 dark:bg-slate-800/60 grid place-items-center">Image</div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Heddoko — Smart Motion Garments</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Founded a wearable 3D motion‑capture platform; real‑time coaching; media & awards recognition.</p>
+            <div class="mt-3 text-xs text-slate-500">Wearables · Computer Vision</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience timeline -->
+  <section id="experience" class="py-20 bg-white/70 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Experience</h2>
+      <ol class="relative border-s border-slate-200 dark:border-slate-800" data-aos="fade-up">
+        <li class="ms-6 py-6">
+          <span class="absolute -start-1.5 top-9 h-3 w-3 rounded-full bg-brand"></span>
+          <h3 class="font-semibold">Director of Engineering — Ubisoft</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Leading global engineering for Rainbow Six Mobile; org redesign; content systems; GenAI tools for velocity.</p>
+        </li>
+        <li class="ms-6 py-6">
+          <span class="absolute -start-1.5 top-9 h-3 w-3 rounded-full bg-brand"></span>
+          <h3 class="font-semibold">Senior Manager — Brex</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Card infrastructure & processing; ME2/ME3 launches; Apollo; FX revenue; 3DS; contactless; global expansion.</p>
+        </li>
+        <li class="ms-6 py-6">
+          <span class="absolute -start-1.5 top-9 h-3 w-3 rounded-full bg-brand"></span>
+          <h3 class="font-semibold">Founder/CTO — Heddoko</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Smart garments with embedded sensors; 3D mocap and coaching; TechCrunch NFL finalist; WT Innovation Cup finalist.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Highlights / Awards / Press -->
+  <section id="highlights" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Highlights</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-900" data-aos="zoom-in">
+          <h3 class="font-semibold">Content Pipelines</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Automated monetization/content pipelines for Siege & R6 Mobile; authoring & validation tools; UGC‑ready foundations.</p>
+        </div>
+        <div class="rounded-2xl border p-6 bg-white dark:bg-slate-900" data-aos="zoom-in" data-aos-delay="100">
+          <h3 class="font-semibold">Recognition</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Awards & features incl. WT Innovation World Cup finalist; Montreal Inc. grant; NFL TechCrunch 1st & Future finalist.</p>
+        </div>
+        <div class="rounded-2xl border p-6 bg-white dark:bg-slate-900" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="font-semibold">Mentorship</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Built leaders and teams; startup mentor (Techstars/YC‑adjacent mentees); culture of ownership & learning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing / Speaking -->
+  <section id="writing" class="py-20 bg-white/70 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Writing & Speaking</h2>
+      <ul class="grid md:grid-cols-2 gap-4" data-aos="fade-up">
+        <li class="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900">
+          <div class="text-sm text-slate-500">Article</div>
+          <a class="block font-medium hover:underline" href="#">GenAI to reduce engineering friction</a>
+        </li>
+        <li class="rounded-xl border p-5 bg-white dark:bg-slate-900">
+          <div class="text-sm text-slate-500">Talk</div>
+          <a class="block font-medium hover:underline" href="#">Scaling content systems across studios</a>
+        </li>
+        <li class="rounded-xl border p-5 bg-white dark:bg-slate-900">
+          <div class="text-sm text-slate-500">Post</div>
+          <a class="block font-medium hover:underline" href="#">From mocap to fintech platforms</a>
+        </li>
+        <li class="rounded-xl border p-5 bg-white dark:bg-slate-900">
+          <div class="text-sm text-slate-500">Podcast</div>
+          <a class="block font-medium hover:underline" href="#">Operating at startup speed & enterprise scale</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold">Let’s build ambitious things</h2>
+      <p class="mt-3 text-slate-600 dark:text-slate-300">Advisory, leadership, or hands‑on systems work. Best fit: platforms, content pipelines, and AI‑assisted tooling.</p>
+      <div class="mt-6 flex items-center justify-center gap-3" data-aos="fade-up">
+        <a href="mailto:mazen.elbawab@gmail.com" class="rounded-xl bg-brand px-5 py-3 text-white shadow-soft hover:bg-brand/90">Email</a>
+        <a href="https://www.linkedin.com/in/mazenelbawab/" class="rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">LinkedIn</a>
+        <a href="/Mazen-Elbawab-Director-of-Engineering-2025.pdf" class="rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 flex items-center justify-between">
+      <p>© <span id="year"></span> Mazen Elbawab. All rights reserved.</p>
+      <a href="#home" class="underline underline-offset-4">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- JS: Theme toggle, menu, scrollspy, AOS init -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // --- Dark mode toggle (persisted) ---
+    const docEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      docEl.classList.add('dark');
+    }
+    function toggleTheme(){
+      docEl.classList.toggle('dark');
+      localStorage.setItem('theme', docEl.classList.contains('dark') ? 'dark' : 'light');
+    }
+    themeBtn.addEventListener('click', toggleTheme);
+
+    // --- Mobile menu ---
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+
+    // --- Scrollspy: highlight current nav link ---
+    const links = Array.from(document.querySelectorAll('.navlink'));
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = '#' + entry.target.id;
+        const link = links.find(a => a.getAttribute('href') === id);
+        if (link) {
+          link.classList.toggle('text-brand', entry.isIntersecting);
+          link.classList.toggle('font-semibold', entry.isIntersecting);
+        }
+      });
+    }, { rootMargin: '-60% 0px -35% 0px', threshold: 0.01 });
+    sections.forEach(s => observer.observe(s));
+
+    // --- AOS init (gentle) ---
+    AOS.init({ duration: 700, easing: 'ease-out-quart', once: true });
+
+    // --- Year ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
