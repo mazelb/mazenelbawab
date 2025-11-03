@@ -92,12 +92,39 @@ function initializePersonalInfo() {
     const contactPhone = document.getElementById('contact-phone');
     const contactPhoneText = document.getElementById('contact-phone-text');
     
-    if (contactEmail) contactEmail.href = `mailto:${CONFIG.personal.email}`;
-    if (contactEmailText) contactEmailText.textContent = CONFIG.personal.email;
+    // Obfuscate email - split into user and domain
+    if (contactEmail && CONFIG.personal.email) {
+        const emailParts = CONFIG.personal.email.split('@');
+        if (emailParts.length === 2) {
+            contactEmail.setAttribute('data-user', btoa(emailParts[0])); // Base64 encode
+            contactEmail.setAttribute('data-domain', btoa(emailParts[1]));
+            contactEmail.addEventListener('click', function(e) {
+                e.preventDefault();
+                const user = atob(this.getAttribute('data-user'));
+                const domain = atob(this.getAttribute('data-domain'));
+                window.location.href = `mailto:${user}@${domain}`;
+            });
+            if (contactEmailText) {
+                contactEmailText.textContent = CONFIG.personal.email;
+            }
+        }
+    }
+    
+    // Obfuscate phone number
+    if (contactPhone && CONFIG.personal.phone) {
+        contactPhone.setAttribute('data-phone', btoa(CONFIG.personal.phone));
+        contactPhone.addEventListener('click', function(e) {
+            e.preventDefault();
+            const phone = atob(this.getAttribute('data-phone'));
+            window.location.href = `tel:${phone}`;
+        });
+        if (contactPhoneText) {
+            contactPhoneText.textContent = CONFIG.personal.phone;
+        }
+    }
+    
     if (contactLinkedin) contactLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
     if (contactGithub) contactGithub.href = `https://github.com/${CONFIG.personal.github}`;
-    if (contactPhone) contactPhone.href = `tel:${CONFIG.personal.phone}`;
-    if (contactPhoneText) contactPhoneText.textContent = CONFIG.personal.phone;
     
     // Footer
     const currentYear = document.getElementById('current-year');
@@ -236,9 +263,11 @@ function initializeContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
     
-    // Set form action from config
+    // Obfuscate and set form action from config
     if (CONFIG.contactForm && CONFIG.contactForm.formspreeId) {
-        form.action = `https://formspree.io/f/${CONFIG.contactForm.formspreeId}`;
+        // Decode the obfuscated form ID at runtime
+        const formId = atob(CONFIG.contactForm.formspreeId);
+        form.action = `https://formspree.io/f/${formId}`;
     }
     
     form.addEventListener('submit', async function(e) {
@@ -253,6 +282,14 @@ function initializeContactForm() {
             statusDiv.textContent = '⚠️ Contact form not configured. Please update the Formspree ID in config.js';
             statusDiv.className = 'form-status error';
             statusDiv.classList.remove('hidden');
+            return;
+        }
+        
+        // Check honeypot field (bot detection)
+        const honeypot = form.querySelector('input[name="_gotcha"]');
+        if (honeypot && honeypot.value !== '') {
+            // Silently reject - it's a bot
+            console.log('Bot detected via honeypot');
             return;
         }
         
