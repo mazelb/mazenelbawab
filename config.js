@@ -50,10 +50,11 @@ const CONFIG = {
     // ========================================
     // CONTACT FORM (FORMSPREE)
     // Sign up at https://formspree.io to get your form endpoint
-    // Replace YOUR_FORM_ID with your actual Formspree form ID
+    // IMPORTANT: Store your Formspree ID as Base64 encoded for basic obfuscation
+    // To encode: btoa('your_form_id') in browser console or use online tool
     // ========================================
     contactForm: {
-        formspreeId: "myzbqjrz"  // Get this from https://formspree.io after creating a form
+        formspreeId: "bXl6YnFqcno="  // Base64 encoded form ID (decodes to: myzbqjrz)
     },
 
     // ========================================

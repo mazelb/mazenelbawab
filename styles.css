@@ -514,6 +514,15 @@ section:nth-child(even) {
     text-align: left;
 }
 
+/* Honeypot field - hidden from users but visible to bots */
+input[name="_gotcha"] {
+    position: absolute !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+}
+
 /* Contact Form */
 .contact-form-section h2,
 .contact-links-section h2 {

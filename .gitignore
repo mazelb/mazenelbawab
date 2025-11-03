@@ -1,0 +1,15 @@
+# Documentation files
+SECURITY-GUIDE.md
+SECURITY-CHANGES.md
+CONTACT-FORM-SETUP.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
