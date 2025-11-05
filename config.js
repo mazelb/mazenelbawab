@@ -9,7 +9,7 @@ const CONFIG = {
     // ========================================
     personal: {
         name: "Mazen Elbawab",
-        title: "Engineering Director",
+        title: "Engineering Leadership · Systems at Scale",
         tagline: "Building & Scaling Innovative Products",
         location: "Montreal, Quebec, Canada",
         email: "mazen.elbawab@gmail.com",
@@ -79,16 +79,15 @@ const CONFIG = {
     // HOME PAGE CONTENT
     // ========================================
     home: {
+        heroIntro: "Whether launching one of Ubisoft's largest mobile titles, scaling global payment systems at Brex, or creating the world's first 3D motion-capture garment at Heddoko, I've always connected engineering excellence with human impact.",
         intro: [
-            "Throughout my career, I've always been drawn to building what didn't exist before — teams, systems, and technologies that push the edge of what's possible while standing the test of time.",
-            
-            "Whether launching one of Ubisoft's largest mobile titles, scaling global payment systems at Brex, or creating the world's first 3D motion-capture garment at Heddoko, I've always connected engineering excellence with human impact."
+            "Throughout my career, I've always been drawn to building what didn't exist before — teams, systems, and technologies that push the edge of what's possible while standing the test of time."
         ],
         stats: [
-            { number: "18+", label: "Years in Engineering" },
-            { number: "100+", label: "Engineers Led" },
-            { number: "4", label: "Continents" },
-            { number: "$2.7M", label: "Cost Savings Delivered" }
+            { number: "100+", label: "Engineers led globally" },
+            { number: "$MM+", label: "Cost savings / new revenue" },
+            { number: "3", label: "Industries at scale" },
+            { number: "18+", label: "Years building products" }
         ],
         highlights: [
             {

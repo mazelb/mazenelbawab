@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mazen Elbawab - Engineering Director specializing in building and scaling innovative products">
     <meta name="author" content="Mazen Elbawab">
-    <meta name="keywords" content="Engineering Director, Software Engineering, Fintech, Gaming, Leadership">
+    <meta name="keywords" content="Engineering leadership, Software Engineering, Fintech, Gaming, Innovation">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
@@ -17,6 +17,11 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
     
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Google Analytics - Will be initialized by app.js -->
     <script id="google-analytics-script"></script>
     
@@ -26,6 +31,9 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "Noto Sans", "sans-serif"]
+                    },
                     colors: {
                         slate: {
                             50: '#f8fafc',
@@ -60,7 +68,7 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#" data-tab="home" class="logo tab-link">ME</a>
+            <a href="#" data-tab="home" class="logo tab-link">Mazen</a>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
             <ul id="nav-menu" class="tab-nav">
                 <li><a href="#" data-tab="home" class="tab-link active">Home</a></li>
@@ -83,23 +91,33 @@
         <div id="home-tab" class="tab-content active">
             <section class="hero">
                 <div class="container">
-                    <div class="hero-content">
-                        <h1 id="hero-name" data-aos="fade-up"></h1>
-                        <p class="hero-title" id="hero-title" data-aos="fade-up" data-aos-delay="100"></p>
-                        <p class="tagline" id="hero-tagline" data-aos="fade-up" data-aos-delay="200"></p>
-                        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
-                            <a href="#" data-tab="contact" class="btn btn-primary tab-link">Get In Touch</a>
-                            <a id="hero-linkedin" href="#" target="_blank" class="btn btn-secondary">LinkedIn</a>
-                            <a id="hero-resume" href="#" download class="btn btn-secondary hidden">📄 Resume</a>
+                    <div class="hero-grid">
+                        <div class="hero-content">
+                            <p class="hero-subtitle" id="hero-subtitle" data-aos="fade-up"></p>
+                            <h1 id="hero-name" data-aos="fade-up" data-aos-delay="100"></h1>
+                            <p class="hero-description" id="hero-intro" data-aos="fade-up" data-aos-delay="200"></p>
+                            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
+                                <a href="#" data-tab="contact" class="btn btn-primary tab-link">Get In Touch</a>
+                                <a id="hero-linkedin" href="#" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                                <a id="hero-resume" href="#" download class="btn btn-secondary hidden">Resume</a>
+                            </div>
+                            <div class="hero-companies" data-aos="fade-up" data-aos-delay="400">
+                                ex‑Brex, Ubisoft (Rainbow Six Mobile & Siege), Heddoko (founder).
+                            </div>
+                        </div>
+                        <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
+                            <div class="hero-image-container">
+                                <div class="hero-image-gradient"></div>
+                                <div class="hero-badge">
+                                    <span class="badge-icon">✨</span>
+                                    <span class="badge-text">Active Focus</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Stats Strip -->
-            <section style="background: var(--bg-light); padding: 2rem 0; margin-top: 3rem; border-top: 2px solid var(--border-color); border-bottom: 2px solid var(--border-color);" data-aos="fade-up">
-                <div class="container">
-                    <div id="stats-grid" class="stats-grid"></div>
+                    
+                    <!-- Stats strip -->
+                    <div id="stats-grid" class="stats-grid" data-aos="fade-up"></div>
                 </div>
             </section>
 
