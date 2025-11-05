@@ -73,8 +73,8 @@
             <ul id="nav-menu" class="tab-nav">
                 <li><a href="#" data-tab="home" class="tab-link active">Home</a></li>
                 <li><a href="#" data-tab="journey" class="tab-link">My Journey</a></li>
-                <li id="nav-blog" class="hidden"><a href="#" data-tab="blog" class="tab-link">Blog</a></li>
                 <li id="nav-projects" class="hidden"><a href="#" data-tab="projects" class="tab-link">Highlights</a></li>
+                <li id="nav-blog" class="hidden"><a href="#" data-tab="blog" class="tab-link">Blog</a></li>
                 <li><a href="#" data-tab="contact" class="tab-link">Contact</a></li>
                 <li id="nav-resume" class="hidden"><a id="nav-resume-link" href="#" download>Resume</a></li>
                 <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
@@ -167,10 +167,27 @@
                 <div class="container">
                     <h1 class="page-title">Highlights</h1>
                     <p class="section-subtitle">Featured work and notable contributions</p>
-                    <div id="projects-loading" class="spinner"></div>
-                    <div id="projects-error" class="error-message hidden"></div>
-                    <div id="projects-empty" class="empty-state hidden">No projects found</div>
-                    <div id="projects-grid" class="projects-grid"></div>
+                    
+                    <!-- Patents, Rewards & Recognitions Section -->
+                    <div class="highlights-subsection">
+                        <h2 class="subsection-title" data-aos="fade-up">
+                            <span class="subsection-icon">🏆</span>
+                            Patents, Rewards & Recognitions
+                        </h2>
+                        <div id="recognitions-grid" class="recognitions-grid"></div>
+                    </div>
+                    
+                    <!-- GitHub Projects Section (Toggleable) -->
+                    <div id="github-projects-section" class="highlights-subsection">
+                        <h2 class="subsection-title" data-aos="fade-up">
+                            <span class="subsection-icon">💻</span>
+                            GitHub Projects
+                        </h2>
+                        <div id="projects-loading" class="spinner"></div>
+                        <div id="projects-error" class="error-message hidden"></div>
+                        <div id="projects-empty" class="empty-state hidden">No projects found</div>
+                        <div id="projects-grid" class="projects-grid"></div>
+                    </div>
                 </div>
             </section>
         </div>

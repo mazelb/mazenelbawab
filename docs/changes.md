@@ -23,5 +23,6 @@
 **Other changes**
 * link from the landing page to Highlights, Contact and Journey where appropriate for easier navigation
 * Change the highlights section to be 2 sub-sections one highlighting patents rewards and recognitions and the second one being the github projects. Make the github projects part togglable on/off
+* Add complete awards and patents with links 
 * Add the timeline extension with past experiences 
 

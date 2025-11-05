@@ -24,7 +24,7 @@ const CONFIG = {
     // ========================================
     features: {
         showBlog: true,        // Toggle Medium blog section
-        showProjects: true,    // Toggle Highlights/Projects section
+        showProjects: true,    // Toggle GitHub projects subsection within Highlights
         showResume: true       // Toggle resume download option
     },
 
@@ -70,8 +70,8 @@ const CONFIG = {
     // ========================================
     github: {
         username: "mazelb",          // Your GitHub username
-        maxRepos: 3,                 // Number of repos to display
-        sortBy: "updated",           // Options: 'updated', 'stars', 'created'
+        maxRepos: 6,                 // Number of repos to display
+        sortBy: "stars",           // Options: 'updated', 'stars', 'created'
         excludeForked: true          // Hide forked repositories
     },
 
@@ -92,18 +92,68 @@ const CONFIG = {
         highlights: [
             {
                 title: "Enterprise Scale",
-                icon: "🏢",
+                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop&auto=format",
                 description: "Led 100+ engineers across Montreal, Kyiv, Winnipeg, and Toronto for Ubisoft's Rainbow Six Mobile, creating shared purpose across studios."
             },
             {
                 title: "Fintech Infrastructure",
-                icon: "💳",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&auto=format",
                 description: "Built and scaled Brex's global card platform moving billions securely across borders, reducing costs and opening new revenue streams."
             },
             {
                 title: "Startup Innovation",
-                icon: "🚀",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop&auto=format",
                 description: "Founded Heddoko, creating smart garments with 3D motion capture featured at CES 2016 and NFL's First & Future program."
+            }
+        ],
+        recognitions: [
+            {
+                title: "Motion Capture Garment Patent",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop&auto=format",
+                category: "Patent",
+                year: "2017",
+                description: "Patent for innovative 3D motion capture system integrated into wearable garments.",
+                link: "https://patents.google.com/patent/WO2017088068A1/un"
+            },
+            {
+                title: "NFL 1st & Future Finalist",
+                image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=400&h=300&fit=crop&auto=format",
+                category: "Recognition",
+                year: "2016",
+                description: "TechCrunch & NFL First and Future finalist for athlete health and performance technology innovation.",
+                link: "https://www.youtube.com/watch?v=TfFeJpMySok&t=2s&ab_channel=TechCrunch"
+            },
+            {
+                title: "Wearable Technology Innovation World Cup Finalist",
+                image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop&auto=format",
+                category: "Award",
+                year: "2015",
+                description: "Recognized as a Wearable Technologies Hero of the Year for innovation in wearable technology.",
+                link: "https://wt-obk.wearable-technologies.com/2015/01/meet-the-wt-wearable-technologies-heroes-of-the-year/"
+            },
+            {
+                title: "Techstars Boston Alumni",
+                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop&auto=format",
+                category: "Recognition",
+                year: "2015",
+                description: "Graduated from Techstars Boston accelerator program, Spring 2015 cohort.",
+                link: "https://www.youtube.com/watch?v=XVWeY7Acp_Q&ab_channel=BostInno"
+            },
+            {
+                title: "DICOM Tags Management Patent",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop&auto=format",
+                category: "Patent",
+                year: "2007",
+                description: "Method for increasing flexibility of DICOM tags management in application-specific integration.",
+                link: "http://www.google.ch/patents/US20070041647"
+            },
+            {
+                title: "OMIRAD: Optical-MRI Coregistration Platform",
+                image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=400&h=300&fit=crop&auto=format",
+                category: "Research",
+                year: "2007",
+                description: "Standardized platform for coregistration of nonconcurrent diffuse optical and magnetic resonance imaging.",
+                link: "https://www.spiedigitallibrary.org/journals/journal-of-biomedical-optics/volume-12/issue-5/051902/Standardized-platform-for-coregistration-of-nonconcurrent-diffuse-optical-and-magnetic/10.1117/1.2798630.full?SSO=1"
             }
         ]
     },

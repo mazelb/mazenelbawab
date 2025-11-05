@@ -136,12 +136,42 @@ function initializePersonalInfo() {
         highlightsGrid.innerHTML = CONFIG.home.highlights
             .map((highlight, index) => `
                 <a href="#" data-tab="projects" class="highlight-card tab-link" data-aos="fade-up" data-aos-delay="${index * 100 + 100}">
-                    <div class="highlight-icon">${highlight.icon}</div>
+                    <div class="highlight-image-container">
+                        <img src="${highlight.image}" alt="${highlight.title}" class="highlight-image" />
+                    </div>
                     <h3>${highlight.title}</h3>
                     <p>${highlight.description}</p>
                     <div class="highlight-arrow">→</div>
                 </a>
             `).join('');
+    }
+    
+    // Recognitions section (Patents, Rewards & Recognitions)
+    const recognitionsGrid = document.getElementById('recognitions-grid');
+    if (recognitionsGrid && CONFIG.home && CONFIG.home.recognitions) {
+        recognitionsGrid.innerHTML = CONFIG.home.recognitions
+            .map((recognition, index) => {
+                const cardContent = `
+                    <div class="recognition-image-container">
+                        <img src="${recognition.image}" alt="${recognition.title}" class="recognition-image" />
+                    </div>
+                    <div class="recognition-content">
+                        <div class="recognition-header">
+                            <span class="recognition-category">${recognition.category}</span>
+                            <span class="recognition-year">${recognition.year}</span>
+                        </div>
+                        <h3>${recognition.title}</h3>
+                        <p>${recognition.description}</p>
+                        ${recognition.link ? '<span class="recognition-link-indicator">View Details →</span>' : ''}
+                    </div>
+                `;
+                
+                if (recognition.link) {
+                    return `<a href="${recognition.link}" target="_blank" rel="noopener noreferrer" class="recognition-card recognition-card-link" data-aos="fade-up" data-aos-delay="${index * 100}">${cardContent}</a>`;
+                } else {
+                    return `<div class="recognition-card" data-aos="fade-up" data-aos-delay="${index * 100}">${cardContent}</div>`;
+                }
+            }).join('');
     }
     
     // Journey section (combines about intro + experience timeline)
@@ -248,10 +278,16 @@ function initializeFeatures() {
         navBlog.classList.remove('hidden');
     }
     
-    // Show/hide projects nav item
+    // Always show projects/highlights nav item (contains recognitions + optional GitHub projects)
     const navProjects = document.getElementById('nav-projects');
-    if (navProjects && CONFIG.features.showProjects) {
+    if (navProjects) {
         navProjects.classList.remove('hidden');
+    }
+    
+    // Show/hide GitHub projects subsection in Highlights
+    const githubProjectsSection = document.getElementById('github-projects-section');
+    if (githubProjectsSection && !CONFIG.features.showProjects) {
+        githubProjectsSection.style.display = 'none';
     }
     
     // Show/hide resume download

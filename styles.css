@@ -564,7 +564,7 @@ section:nth-child(even) {
 }
 
 .highlight-card {
-    padding: var(--spacing-lg);
+    padding: 0;
     background: var(--bg-light);
     border-radius: var(--rounded-2xl);
     border: 2px solid var(--border-color);
@@ -575,12 +575,32 @@ section:nth-child(even) {
     color: inherit;
     cursor: pointer;
     position: relative;
+    overflow: hidden;
 }
 
 .highlight-card:hover {
     transform: translateY(-5px);
     border-color: var(--brand-color);
     box-shadow: var(--shadow-lg);
+}
+
+.highlight-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-color);
+}
+
+.highlight-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.highlight-card:hover .highlight-image {
+    transform: scale(1.05);
 }
 
 .highlight-icon {
@@ -591,12 +611,13 @@ section:nth-child(even) {
 .highlight-card h3 {
     font-size: 1.5rem;
     color: var(--brand-color);
-    margin-bottom: var(--spacing-sm);
+    margin: var(--spacing-md) var(--spacing-lg) var(--spacing-sm) var(--spacing-lg);
 }
 
 .highlight-card p {
     line-height: 1.7;
     color: var(--text-light);
+    padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
 }
 
 .highlight-arrow {
@@ -721,9 +742,21 @@ section:nth-child(even) {
    ======================================== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     margin-top: var(--spacing-md);
+}
+
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .project-card {
@@ -813,6 +846,157 @@ section:nth-child(even) {
 
 .project-link:hover {
     text-decoration: underline;
+}
+
+/* ========================================
+   HIGHLIGHTS SUBSECTIONS
+   ======================================== */
+.highlights-subsection {
+    margin-top: var(--spacing-xl);
+    margin-bottom: calc(var(--spacing-xl) * 2);
+}
+
+.subsection-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.subsection-icon {
+    font-size: 2.5rem;
+}
+
+/* ========================================
+   RECOGNITIONS SECTION (Patents, Awards, Recognitions)
+   ======================================== */
+.recognitions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+@media (max-width: 1024px) {
+    .recognitions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .recognitions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.recognition-card {
+    background: var(--bg-light);
+    border-radius: var(--rounded-2xl);
+    padding: 0;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.recognition-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand-color);
+}
+
+.recognition-image-container {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-color);
+}
+
+.recognition-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.recognition-card:hover .recognition-image {
+    transform: scale(1.05);
+}
+
+.recognition-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.recognition-content {
+    padding: var(--spacing-lg);
+}
+
+.recognition-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.recognition-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--brand-color);
+    background: rgba(37, 99, 235, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+}
+
+.recognition-year {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.recognition-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.3;
+}
+
+.recognition-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+.recognition-card-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+}
+
+.recognition-card-link:hover {
+    text-decoration: none;
+}
+
+.recognition-link-indicator {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--brand-color);
+    transition: transform 0.3s ease;
+}
+
+.recognition-card-link:hover .recognition-link-indicator {
+    transform: translateX(4px);
 }
 
 /* ========================================
@@ -1466,15 +1650,22 @@ footer p + p {
 }
 
 :root.dark .blog-card,
-:root.dark .project-card {
+:root.dark .project-card,
+:root.dark .recognition-card {
     background: var(--bg-light);
     border-color: var(--border-color);
 }
 
 :root.dark .blog-card:hover,
-:root.dark .project-card:hover {
+:root.dark .project-card:hover,
+:root.dark .recognition-card:hover {
     border-color: var(--primary-color);
     transform: translateY(-5px);
+}
+
+:root.dark .recognition-category {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--brand-color-light);
 }
 
 :root.dark .timeline-marker {
