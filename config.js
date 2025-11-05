@@ -76,16 +76,54 @@ const CONFIG = {
     },
 
     // ========================================
+    // HOME PAGE CONTENT
+    // ========================================
+    home: {
+        intro: [
+            "Throughout my career, I've always been drawn to building what didn't exist before — teams, systems, and technologies that push the edge of what's possible while standing the test of time.",
+            
+            "Whether launching one of Ubisoft's largest mobile titles, scaling global payment systems at Brex, or creating the world's first 3D motion-capture garment at Heddoko, I've always connected engineering excellence with human impact."
+        ],
+        stats: [
+            { number: "18+", label: "Years in Engineering" },
+            { number: "100+", label: "Engineers Led" },
+            { number: "4", label: "Continents" },
+            { number: "$2.7M", label: "Cost Savings Delivered" }
+        ],
+        highlights: [
+            {
+                title: "Enterprise Scale",
+                icon: "🏢",
+                description: "Led 100+ engineers across Montreal, Kyiv, Winnipeg, and Toronto for Ubisoft's Rainbow Six Mobile, creating shared purpose across studios."
+            },
+            {
+                title: "Fintech Infrastructure",
+                icon: "💳",
+                description: "Built and scaled Brex's global card platform moving billions securely across borders, reducing costs and opening new revenue streams."
+            },
+            {
+                title: "Startup Innovation",
+                icon: "🚀",
+                description: "Founded Heddoko, creating smart garments with 3D motion capture featured at CES 2016 and NFL's First & Future program."
+            }
+        ]
+    },
+
+    // ========================================
     // MY JOURNEY SECTION
     // Combines background story with professional experience
     // ========================================
     journey: {
         intro: [
-            "With 18 years in software engineering and 12+ years in leadership, I'm an Engineering Director known for building and scaling innovative products across diverse industries. I specialize in architecting complex systems, leading high-impact teams, and driving strategic initiatives that merge technology and vision.",
+            "What sets me apart is the ability to operate at both startup speed and enterprise scale — moving at the pace of innovation while maintaining the engineering rigor that builds reliability and trust.",
             
-            "My journey has taken me from pioneering Kinect game development at Ubisoft, to founding Heddoko—a wearable tech startup that created the world's first 3D motion-capture garment—to building global payment infrastructure at Brex. Throughout, I've led teams ranging from 12 to over 100 engineers across multiple continents.",
+            "I've led teams spanning platform engineering, content systems, and AI-driven automation, always grounded in mentorship, cross-disciplinary collaboration, and a long-term vision for scalable architectures.",
             
-            "I believe in lifelong learning, adapting quickly to new challenges, and taking full ownership of every project from vision to execution."
+            "At Ubisoft, I led more than a hundred engineers across multiple studios worldwide, aligning teams to deliver seamless experiences to millions of players. It was less about managing processes and more about creating shared purpose — a culture where every engineer felt accountable for what we were crafting together.",
+            
+            "At Brex, I built the company's global card infrastructure — a platform that now moves billions securely across borders. We reduced millions in costs, opened new revenue streams, and partnered closely with Mastercard. What I'm most proud of is watching the engineers I mentored grow into leaders themselves.",
+            
+            "At Heddoko, I founded a company that started in a small lab and ended up on the CES stage and in the NFL's innovation program. We built smart garments that captured motion in 3D with medical precision — years before 'wearable AI' became a buzzword. That experience taught me resilience, humility, and the art of turning complex technology into something people can truly use."
         ],
         timeline: [
             {

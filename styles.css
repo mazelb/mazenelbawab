@@ -301,6 +301,110 @@ section:nth-child(even) {
 }
 
 /* ========================================
+   HOME PAGE SECTIONS
+   ======================================== */
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+/* Introduction Content */
+.intro-content {
+    max-width: 900px;
+    margin: 0 auto var(--spacing-xl);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.intro-content p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+}
+
+.stat-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--bg-light);
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Highlights Grid */
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+.highlight-card {
+    padding: var(--spacing-lg);
+    background: var(--bg-light);
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+}
+
+.highlight-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.highlight-card h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.highlight-card p {
+    line-height: 1.7;
+    color: var(--text-light);
+}
+
+/* ========================================
    ABOUT SECTION
    ======================================== */
 .about-content {
@@ -1021,4 +1125,16 @@ footer p + p {
 
 :root.dark ::-webkit-scrollbar-track {
     background: var(--bg-color);
+}
+
+/* Dark mode for home page sections */
+:root.dark .stat-card,
+:root.dark .highlight-card {
+    background: var(--bg-light);
+    border-color: var(--border-color);
+}
+
+:root.dark .stat-card:hover,
+:root.dark .highlight-card:hover {
+    border-color: var(--primary-color);
 }

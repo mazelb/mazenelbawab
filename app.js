@@ -100,12 +100,45 @@ function initializeGoogleAnalytics() {
 function initializePersonalInfo() {
     // Hero section (only on home page)
     const heroName = document.getElementById('hero-name');
+    const heroTitle = document.getElementById('hero-title');
     const heroTagline = document.getElementById('hero-tagline');
     const heroLinkedin = document.getElementById('hero-linkedin');
     
     if (heroName) heroName.textContent = CONFIG.personal.name;
+    if (heroTitle) heroTitle.textContent = CONFIG.personal.title;
     if (heroTagline) heroTagline.textContent = CONFIG.personal.tagline;
     if (heroLinkedin) heroLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
+    
+    // Home page content (intro, stats, highlights)
+    const homeIntroContent = document.getElementById('home-intro-content');
+    if (homeIntroContent && CONFIG.home && CONFIG.home.intro) {
+        homeIntroContent.innerHTML = CONFIG.home.intro
+            .map(paragraph => `<p>${paragraph}</p>`)
+            .join('');
+    }
+    
+    const statsGrid = document.getElementById('stats-grid');
+    if (statsGrid && CONFIG.home && CONFIG.home.stats) {
+        statsGrid.innerHTML = CONFIG.home.stats
+            .map((stat, index) => `
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-label">${stat.label}</div>
+                </div>
+            `).join('');
+    }
+    
+    const highlightsGrid = document.getElementById('highlights-grid');
+    if (highlightsGrid && CONFIG.home && CONFIG.home.highlights) {
+        highlightsGrid.innerHTML = CONFIG.home.highlights
+            .map((highlight, index) => `
+                <div class="highlight-card" data-aos="fade-up" data-aos-delay="${index * 100 + 100}">
+                    <div class="highlight-icon">${highlight.icon}</div>
+                    <h3>${highlight.title}</h3>
+                    <p>${highlight.description}</p>
+                </div>
+            `).join('');
+    }
     
     // Journey section (combines about intro + experience timeline)
     const journeyIntro = document.getElementById('journey-intro');
