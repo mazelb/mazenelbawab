@@ -107,14 +107,41 @@ function initializePersonalInfo() {
     if (heroTagline) heroTagline.textContent = CONFIG.personal.tagline;
     if (heroLinkedin) heroLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
     
-    // About section
+    // Journey section (combines about intro + experience timeline)
+    const journeyIntro = document.getElementById('journey-intro');
+    const journeyTimeline = document.getElementById('journey-timeline');
+    
+    if (journeyIntro && CONFIG.journey && CONFIG.journey.intro) {
+        journeyIntro.innerHTML = CONFIG.journey.intro
+            .map(paragraph => `<p>${paragraph}</p>`)
+            .join('');
+    }
+    
+    if (journeyTimeline && CONFIG.journey && CONFIG.journey.timeline) {
+        journeyTimeline.innerHTML = CONFIG.journey.timeline
+            .map((item, index) => `
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="${(index % 3) * 100 + 100}">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>${item.title}</h3>
+                        <p class="timeline-company">${item.company}</p>
+                        <p class="timeline-period">${item.period}</p>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+    }
+    
+    // About section (legacy - keeping for backwards compatibility with multi-page if needed)
     const aboutContent = document.getElementById('about-content');
     if (aboutContent) {
-        CONFIG.about.forEach(paragraph => {
-            const p = document.createElement('p');
-            p.textContent = paragraph;
-            aboutContent.appendChild(p);
-        });
+        // Use journey intro if available, otherwise fall back to old about array
+        const aboutText = (CONFIG.journey && CONFIG.journey.intro) ? CONFIG.journey.intro : CONFIG.about;
+        if (aboutText) {
+            aboutContent.innerHTML = aboutText
+                .map(paragraph => `<p>${paragraph}</p>`)
+                .join('');
+        }
     }
     
     // Contact section
@@ -204,6 +231,13 @@ function initializeFeatures() {
         if (heroResume) {
             heroResume.href = resumeFilename;
             heroResume.classList.remove('hidden');
+        }
+        
+        // Quick link card on home page
+        const heroResumeCard = document.getElementById('hero-resume-card');
+        if (heroResumeCard) {
+            heroResumeCard.href = resumeFilename;
+            heroResumeCard.classList.remove('hidden');
         }
         
         // Contact section link

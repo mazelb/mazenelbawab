@@ -10,7 +10,7 @@ const CONFIG = {
     personal: {
         name: "Mazen Elbawab",
         title: "Engineering Director",
-        tagline: "Building & Scaling Innovative Products Across Fintech, Gaming & Wearable Tech",
+        tagline: "Building & Scaling Innovative Products",
         location: "Montreal, Quebec, Canada",
         email: "mazen.elbawab@gmail.com",
         phone: "+1-514-992-3126",
@@ -23,8 +23,8 @@ const CONFIG = {
     // Set to true/false to show/hide sections
     // ========================================
     features: {
-        showBlog: false,        // Toggle Medium blog section
-        showProjects: false,    // Toggle GitHub projects section
+        showBlog: true,        // Toggle Medium blog section
+        showProjects: true,    // Toggle Highlights/Projects section
         showResume: true       // Toggle resume download option
     },
 
@@ -76,14 +76,48 @@ const CONFIG = {
     },
 
     // ========================================
-    // ABOUT SECTION
-    // Each string is a separate paragraph
+    // MY JOURNEY SECTION
+    // Combines background story with professional experience
     // ========================================
-    about: [
-        "With 18 years in software engineering and 12+ years in leadership, I'm an Engineering Director known for building and scaling innovative products across diverse industries. I specialize in architecting complex systems, leading high-impact teams, and driving strategic initiatives that merge technology and vision.",
-        
-        "My journey has taken me from pioneering Kinect game development at Ubisoft, to founding Heddoko—a wearable tech startup that created the world's first 3D motion-capture garment—to building global payment infrastructure at Brex. Throughout, I've led teams ranging from 12 to over 100 engineers across multiple continents.",
-        
-        "I believe in lifelong learning, adapting quickly to new challenges, and taking full ownership of every project from vision to execution. Based in Montreal, I'm a single father who balances my passion for innovation with woodworking, cooking, and staying active."
-    ]
+    journey: {
+        intro: [
+            "With 18 years in software engineering and 12+ years in leadership, I'm an Engineering Director known for building and scaling innovative products across diverse industries. I specialize in architecting complex systems, leading high-impact teams, and driving strategic initiatives that merge technology and vision.",
+            
+            "My journey has taken me from pioneering Kinect game development at Ubisoft, to founding Heddoko—a wearable tech startup that created the world's first 3D motion-capture garment—to building global payment infrastructure at Brex. Throughout, I've led teams ranging from 12 to over 100 engineers across multiple continents.",
+            
+            "I believe in lifelong learning, adapting quickly to new challenges, and taking full ownership of every project from vision to execution."
+        ],
+        timeline: [
+            {
+                title: "Director of Engineering",
+                company: "Ubisoft",
+                period: "2024 - Present",
+                description: "Leading 100+ global engineers across Montreal, Kyiv, Winnipeg, and Toronto for Rainbow Six Mobile. Driving cross-studio collaboration, reorganizing engineering org for better execution, and championing AI integration to boost developer productivity."
+            },
+            {
+                title: "Senior Engineering Manager",
+                company: "Brex",
+                period: "2021 - 2024",
+                description: "Led 20+ engineers scaling Brex's global card platform. Rebuilt card issuance infrastructure, reduced third-party dependencies, and managed key partnerships."
+            },
+            {
+                title: "Senior Engineering Manager",
+                company: "Ubisoft",
+                period: "2017 - 2021",
+                description: "Led 30+ cross-functional engineers for Rainbow Six Siege across multiple studios. Oversaw partnerships with Microsoft, Sony, and Audio Kinetic."
+            },
+            {
+                title: "Founder & CTO",
+                company: "Heddoko",
+                period: "2012 - 2017",
+                description: "Founded and led ML-driven development of real-time motion analytics wearables. Secured $1.5M seed funding, grew team to 20+ people. Techstars alumni, featured in TechCrunch, CES 2016, and NFL's First & Future program."
+            },
+            {
+                title: "Senior Software Engineer",
+                company: "Ubisoft",
+                period: "2009 - 2012",
+                description: "Pioneered Kinect game engine development, leading team of 12 engineers. Released \"Your Shape Fitness 2012,\" \"Michael Jackson the Experience,\" and \"Just Dance Kinect\" for Xbox 360."
+            }
+        ]
+    }
 };
