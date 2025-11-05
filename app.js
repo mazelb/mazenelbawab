@@ -146,23 +146,28 @@ function initializePersonalInfo() {
     
     if (journeyIntro && CONFIG.journey && CONFIG.journey.intro) {
         journeyIntro.innerHTML = CONFIG.journey.intro
-            .map(paragraph => `<p>${paragraph}</p>`)
+            .map((paragraph, index) => `<p data-aos="fade-up" data-aos-delay="${index * 100 + 100}" data-aos-duration="700">${paragraph}</p>`)
             .join('');
     }
     
     if (journeyTimeline && CONFIG.journey && CONFIG.journey.timeline) {
         journeyTimeline.innerHTML = CONFIG.journey.timeline
-            .map((item, index) => `
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="${(index % 3) * 100 + 100}">
-                    <div class="timeline-marker"></div>
+            .map((item, index) => {
+                // Alternate between left and right animations
+                const animation = index % 2 === 0 ? 'fade-right' : 'fade-left';
+                const delay = index * 150; // Stagger animations as user scrolls
+                
+                return `
+                <div class="timeline-item" data-aos="${animation}" data-aos-delay="${delay}" data-aos-duration="800" data-aos-once="false">
+                    <div class="timeline-marker" data-aos="zoom-in" data-aos-delay="${delay + 200}" data-aos-duration="600"></div>
                     <div class="timeline-content">
-                        <h3>${item.title}</h3>
-                        <p class="timeline-company">${item.company}</p>
-                        <p class="timeline-period">${item.period}</p>
-                        <p>${item.description}</p>
+                        <h3 data-aos="fade-up" data-aos-delay="${delay + 100}">${item.title}</h3>
+                        <p class="timeline-company" data-aos="fade-up" data-aos-delay="${delay + 200}">${item.company}</p>
+                        <p class="timeline-period" data-aos="fade-up" data-aos-delay="${delay + 250}">${item.period}</p>
+                        <p data-aos="fade-up" data-aos-delay="${delay + 300}">${item.description}</p>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
     }
     
     // About section (legacy - keeping for backwards compatibility with multi-page if needed)

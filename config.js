@@ -115,15 +115,9 @@ const CONFIG = {
     // ========================================
     journey: {
         intro: [
-            "What sets me apart is the ability to operate at both startup speed and enterprise scale — moving at the pace of innovation while maintaining the engineering rigor that builds reliability and trust.",
+            "I've spent 18+ years building and scaling products across gaming, fintech, and wearable tech — leading teams from 12 to 100+ engineers across multiple continents.",
             
-            "I've led teams spanning platform engineering, content systems, and AI-driven automation, always grounded in mentorship, cross-disciplinary collaboration, and a long-term vision for scalable architectures.",
-            
-            "At Ubisoft, I led more than a hundred engineers across multiple studios worldwide, aligning teams to deliver seamless experiences to millions of players. It was less about managing processes and more about creating shared purpose — a culture where every engineer felt accountable for what we were crafting together.",
-            
-            "At Brex, I built the company's global card infrastructure — a platform that now moves billions securely across borders. We reduced millions in costs, opened new revenue streams, and partnered closely with Mastercard. What I'm most proud of is watching the engineers I mentored grow into leaders themselves.",
-            
-            "At Heddoko, I founded a company that started in a small lab and ended up on the CES stage and in the NFL's innovation program. We built smart garments that captured motion in 3D with medical precision — years before 'wearable AI' became a buzzword. That experience taught me resilience, humility, and the art of turning complex technology into something people can truly use."
+            "What sets me apart is the ability to operate at both startup speed and enterprise scale, moving at the pace of innovation while maintaining the engineering rigor that builds reliability and trust."
         ],
         timeline: [
             {

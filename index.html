@@ -120,10 +120,10 @@
         <div id="journey-tab" class="tab-content">
             <section id="journey" class="page-content">
                 <div class="container">
-                    <h2 class="page-title" data-aos="fade-down">My Journey</h2>
-                    <div class="about-content" id="journey-intro" data-aos="fade-up"></div>
+                    <h2 class="page-title" data-aos="fade-down" data-aos-duration="800">My Journey</h2>
+                    <div class="about-content" id="journey-intro" data-aos="fade-up" data-aos-delay="200"></div>
                     
-                    <h3 class="section-subtitle" style="margin-top: 3rem; margin-bottom: 2rem;" data-aos="fade-up">Career Milestones</h3>
+                    <h3 class="section-subtitle" style="margin-top: 3rem; margin-bottom: 2rem;" data-aos="zoom-in" data-aos-delay="300">Career Milestones</h3>
                     <div class="timeline" id="journey-timeline"></div>
                 </div>
             </section>
@@ -247,13 +247,19 @@
         AOS.init({ 
             duration: 700, 
             easing: 'ease-out-quart', 
-            once: true,
-            offset: 50
+            once: false, // Allow animations to repeat on scroll
+            offset: 100, // Trigger animations 100px before element is in view
+            mirror: true, // Animate out when scrolling past
+            anchorPlacement: 'top-center'
         });
         
         // Refresh AOS when tabs change
         document.addEventListener('tabChanged', function() {
-            setTimeout(() => AOS.refresh(), 100);
+            setTimeout(() => {
+                AOS.refresh();
+                // Re-trigger animations after tab change
+                AOS.refreshHard();
+            }, 150);
         });
     </script>
 </body>
