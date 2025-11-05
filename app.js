@@ -30,11 +30,11 @@ function initializeTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
     
-    // Check for saved theme preference or default to light mode
+    // Check for saved theme preference or default to dark mode
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    // Default to dark mode if no preference is saved
+    if (savedTheme === 'dark' || !savedTheme) {
         htmlElement.classList.add('dark');
     }
     
@@ -100,13 +100,15 @@ function initializeGoogleAnalytics() {
 function initializePersonalInfo() {
     // Hero section (only on home page)
     const heroName = document.getElementById('hero-name');
-    const heroTitle = document.getElementById('hero-title');
-    const heroTagline = document.getElementById('hero-tagline');
+    const heroSubtitle = document.getElementById('hero-subtitle');
+    const heroIntro = document.getElementById('hero-intro');
     const heroLinkedin = document.getElementById('hero-linkedin');
     
     if (heroName) heroName.textContent = CONFIG.personal.name;
-    if (heroTitle) heroTitle.textContent = CONFIG.personal.title;
-    if (heroTagline) heroTagline.textContent = CONFIG.personal.tagline;
+    if (heroSubtitle) heroSubtitle.textContent = CONFIG.personal.title;
+    if (heroIntro && CONFIG.home && CONFIG.home.heroIntro) {
+        heroIntro.textContent = CONFIG.home.heroIntro;
+    }
     if (heroLinkedin) heroLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
     
     // Home page content (intro, stats, highlights)
@@ -121,10 +123,11 @@ function initializePersonalInfo() {
     if (statsGrid && CONFIG.home && CONFIG.home.stats) {
         statsGrid.innerHTML = CONFIG.home.stats
             .map((stat, index) => `
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                <a href="#" data-tab="journey" class="stat-card tab-link" data-aos="fade-up" data-aos-delay="${index * 100}">
                     <div class="stat-number">${stat.number}</div>
                     <div class="stat-label">${stat.label}</div>
-                </div>
+                    <div class="stat-arrow">→</div>
+                </a>
             `).join('');
     }
     
@@ -132,11 +135,12 @@ function initializePersonalInfo() {
     if (highlightsGrid && CONFIG.home && CONFIG.home.highlights) {
         highlightsGrid.innerHTML = CONFIG.home.highlights
             .map((highlight, index) => `
-                <div class="highlight-card" data-aos="fade-up" data-aos-delay="${index * 100 + 100}">
+                <a href="#" data-tab="projects" class="highlight-card tab-link" data-aos="fade-up" data-aos-delay="${index * 100 + 100}">
                     <div class="highlight-icon">${highlight.icon}</div>
                     <h3>${highlight.title}</h3>
                     <p>${highlight.description}</p>
-                </div>
+                    <div class="highlight-arrow">→</div>
+                </a>
             `).join('');
     }
     
