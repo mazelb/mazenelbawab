@@ -79,7 +79,7 @@ const CONFIG = {
     // HOME PAGE CONTENT
     // ========================================
     home: {
-        heroIntro: "Whether launching one of Ubisoft's largest mobile titles, scaling global payment systems at Brex, or creating the world's first 3D motion-capture garment at Heddoko, I've always connected engineering excellence with human impact.",
+        heroIntro: "Whether launching one of Ubisoft's largest titles, scaling global payment systems at Brex, or creating the world's first 3D motion-capture garment at Heddoko, I've always connected engineering excellence with human impact.",
         intro: [
             "Throughout my career, I've always been drawn to building what didn't exist before — teams, systems, and technologies that push the edge of what's possible while standing the test of time."
         ],
@@ -93,7 +93,7 @@ const CONFIG = {
             {
                 title: "Enterprise Scale",
                 image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop&auto=format",
-                description: "Led 100+ engineers across Montreal, Kyiv, Winnipeg, and Toronto for Ubisoft's Rainbow Six Mobile, creating shared purpose across studios."
+                description: "Led 100+ engineers across Montreal, Kyiv, Winnipeg, and Toronto for Ubisoft's Rainbow Six, creating shared purpose across studios."
             },
             {
                 title: "Fintech Infrastructure",
