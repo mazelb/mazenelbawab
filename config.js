@@ -92,24 +92,24 @@ const CONFIG = {
         highlights: [
             {
                 title: "Enterprise Scale",
-                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop&auto=format&sat=-100",
                 description: "Led 100+ engineers across Montreal, Kyiv, Winnipeg, and Toronto for Ubisoft's Rainbow Six, creating shared purpose across studios."
             },
             {
                 title: "Fintech Infrastructure",
-                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&auto=format&sat=-100",
                 description: "Built and scaled Brex's global card platform moving billions securely across borders, reducing costs and opening new revenue streams."
             },
             {
                 title: "Startup Innovation",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop&auto=format&sat=-100",
                 description: "Founded Heddoko, creating smart garments with 3D motion capture featured at CES 2016 and NFL's First & Future program."
             }
         ],
         recognitions: [
             {
                 title: "Motion Capture Garment Patent",
-                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Patent",
                 year: "2017",
                 description: "Patent for innovative 3D motion capture system integrated into wearable garments.",
@@ -117,7 +117,7 @@ const CONFIG = {
             },
             {
                 title: "NFL 1st & Future Finalist",
-                image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Recognition",
                 year: "2016",
                 description: "TechCrunch & NFL First and Future finalist for athlete health and performance technology innovation.",
@@ -125,7 +125,7 @@ const CONFIG = {
             },
             {
                 title: "Wearable Technology Innovation World Cup Finalist",
-                image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Award",
                 year: "2015",
                 description: "Recognized as a Wearable Technologies Hero of the Year for innovation in wearable technology.",
@@ -133,7 +133,7 @@ const CONFIG = {
             },
             {
                 title: "Techstars Boston Alumni",
-                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Recognition",
                 year: "2015",
                 description: "Graduated from Techstars Boston accelerator program, Spring 2015 cohort.",
@@ -141,7 +141,7 @@ const CONFIG = {
             },
             {
                 title: "DICOM Tags Management Patent",
-                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Patent",
                 year: "2007",
                 description: "Method for increasing flexibility of DICOM tags management in application-specific integration.",
@@ -149,7 +149,7 @@ const CONFIG = {
             },
             {
                 title: "OMIRAD: Optical-MRI Coregistration Platform",
-                image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=400&h=300&fit=crop&auto=format",
+                image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=400&h=300&fit=crop&auto=format&sat=-100",
                 category: "Research",
                 year: "2007",
                 description: "Standardized platform for coregistration of nonconcurrent diffuse optical and magnetic resonance imaging.",
