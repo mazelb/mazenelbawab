@@ -301,6 +301,7 @@ function initializeFeatures() {
         if (navResume && navResumeLink) {
             navResumeLink.href = resumeFilename;
             navResumeLink.textContent = '📄 Resume';
+            navResumeLink.target = '_blank';
             navResume.classList.remove('hidden');
         }
         
@@ -308,6 +309,7 @@ function initializeFeatures() {
         const heroResume = document.getElementById('hero-resume');
         if (heroResume) {
             heroResume.href = resumeFilename;
+            heroResume.target = '_blank';
             heroResume.classList.remove('hidden');
         }
         
@@ -315,6 +317,7 @@ function initializeFeatures() {
         const heroResumeCard = document.getElementById('hero-resume-card');
         if (heroResumeCard) {
             heroResumeCard.href = resumeFilename;
+            heroResumeCard.target = '_blank';
             heroResumeCard.classList.remove('hidden');
         }
         
@@ -323,6 +326,7 @@ function initializeFeatures() {
         const contactResumeText = document.getElementById('contact-resume-text');
         if (contactResume && contactResumeText) {
             contactResume.href = resumeFilename;
+            contactResume.target = '_blank';
             contactResumeText.textContent = resumeLabel;
             contactResume.classList.remove('hidden');
         }
