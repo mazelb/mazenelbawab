@@ -173,7 +173,7 @@ const CONFIG = {
                 title: "Director of Engineering",
                 company: "Ubisoft",
                 period: "2024 - Present",
-                description: "Leading 100+ global engineers across Montreal, Kyiv, Winnipeg, and Toronto for Rainbow Six Mobile. Driving cross-studio collaboration, reorganizing engineering org for better execution, and championing AI integration to boost developer productivity."
+                description: "Leading 100+ global engineers across Montreal, Kyiv, Winnipeg, and Toronto for Rainbow Six. Driving cross-studio collaboration, reorganizing engineering org for better execution, and championing AI integration to boost developer productivity."
             },
             {
                 title: "Senior Engineering Manager",
@@ -191,13 +191,25 @@ const CONFIG = {
                 title: "Founder & CTO",
                 company: "Heddoko",
                 period: "2012 - 2017",
-                description: "Founded and led ML-driven development of real-time motion analytics wearables. Secured $1.5M seed funding, grew team to 20+ people. Techstars alumni, featured in TechCrunch, CES 2016, and NFL's First & Future program."
+                description: "Founded and led ML-driven development of real-time motion analytics wearables. Secured $1.5M seed funding, grew team to 20+ people. Techstars Boston 2015 alumni, featured in TechCrunch, CES 2016, and NFL's First & Future program."
             },
             {
-                title: "Senior Software Engineer",
-                company: "Ubisoft",
-                period: "2009 - 2012",
-                description: "Pioneered Kinect game engine development, leading team of 12 engineers. Released \"Your Shape Fitness 2012,\" \"Michael Jackson the Experience,\" and \"Just Dance Kinect\" for Xbox 360."
+                title: "Software Engineering Consultant",
+                company: "Various Clients",
+                period: "2012 - 2014",
+                description: "Led diverse software engineering projects across healthcare, sports analytics, wearables, and web development. Built cloud-based 3D medical imaging visualization (Intrinsic Medical Imaging - C++/OpenGL), motion recognition web interfaces (SportsLogIQ - JavaScript/Node.js), Neptune Pine smartwatch OS (Mobilogie - Android/Java), video surveillance integration (Genetec - C++/C#), and interactive promotional websites (BAM Strategy - HTML5/CSS3). Demonstrated versatility across platforms and technology stacks."
+            },
+            {
+                title: "Software Engineer - Gaming",
+                company: "Ubisoft & Behaviour Interactive",
+                period: "2007 - 2012",
+                description: "Pioneered Kinect game engine development at Ubisoft, leading team of 12 engineers. Released \"Your Shape Fitness 2012,\" \"Michael Jackson the Experience,\" and \"Just Dance Kinect\" for Xbox 360. At Behaviour Interactive, shipped Iron Man game (Marvel's first Iron Man movie tie-in) and My Sims Racing for Xbox, PSP, and Wii. Advanced C++ game development across multiple platforms."
+            },
+            {
+                title: "Software Engineer - Healthcare & Medical Imaging",
+                company: "Siemens Corporate Research & Cynovad",
+                period: "2006 - 2007",
+                description: "Built OMIRAD software for volumetric visualization of breast cancer based on multiple medical imaging techniques at Siemens (received DICOM tags management patent). Developed UI for 3D dental CAD/CAM software and mesh generation algorithms for 3D printing of dental implants at Cynovad. Advanced C++ development with medical imaging standards and digital dentistry systems."
             }
         ]
     }
