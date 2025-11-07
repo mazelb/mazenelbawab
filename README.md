@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio website for Mazen Elbawab - Engineering Director.
+Personal portfolio website for Mazen Elbawab - Engineering Leader.
 
 ## Features
 
