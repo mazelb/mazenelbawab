@@ -365,19 +365,29 @@ nav a.active::after {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
+.hero-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
 .hero-image-gradient {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(226, 232, 240, 1) 100%);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(15, 23, 42, 0.6) 100%);
     position: relative;
+    z-index: 1;
 }
 
 .hero-image-gradient::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 60%),
-                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+    background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
 }
 
 .hero-badge {
@@ -396,6 +406,7 @@ nav a.active::after {
     color: var(--primary-color);
     font-weight: 600;
     font-size: 0.875rem;
+    z-index: 2;
 }
 
 .badge-icon {
