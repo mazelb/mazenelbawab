@@ -6,12 +6,18 @@
 // INITIALIZATION
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize security module FIRST
+    ContactSecurity.init({
+        formId: 'contact-form'
+    });
+    
     initializeTheme();
     initializeGoogleAnalytics();
     initializePersonalInfo();
+    initializeSecureContactInfo();  // NEW: Secure contact initialization
     initializeFeatures();
     initializeTabs();
-    initializeContactForm();
+    initializeSecureContactForm();  // NEW: Secure form initialization
     
     // Load blog and projects data (but don't show until tab is activated)
     if (CONFIG.features.showBlog) {
@@ -96,6 +102,7 @@ function initializeGoogleAnalytics() {
 
 // ========================================
 // PERSONAL INFO INITIALIZATION
+// (Contact info moved to initializeSecureContactInfo)
 // ========================================
 function initializePersonalInfo() {
     // Hero section (only on home page)
@@ -216,19 +223,49 @@ function initializePersonalInfo() {
         }
     }
     
-    // Contact section
+    // Footer
+    const currentYear = document.getElementById('current-year');
+    const footerName = document.getElementById('footer-name');
+    const footerLocation = document.getElementById('footer-location');
+    
+    if (currentYear) currentYear.textContent = new Date().getFullYear();
+    if (footerName) footerName.textContent = CONFIG.personal.name;
+    if (footerLocation) footerLocation.textContent = CONFIG.personal.location;
+}
+
+// ========================================
+// SECURE CONTACT INFO INITIALIZATION
+// Uses ContactSecurity module for obfuscation
+// ========================================
+function initializeSecureContactInfo() {
+    // Email setup with security
     const contactEmail = document.getElementById('contact-email');
     const contactEmailText = document.getElementById('contact-email-text');
-    const contactLinkedin = document.getElementById('contact-linkedin');
-    const contactGithub = document.getElementById('contact-github');
-    const contactPhone = document.getElementById('contact-phone');
-    const contactPhoneText = document.getElementById('contact-phone-text');
     
-    // Obfuscate email - split into user and domain
-    if (contactEmail && CONFIG.personal.email) {
+    if (contactEmail && CONFIG.personal.emailEncoded) {
+        ContactSecurity.setupEmailLink(
+            contactEmail, 
+            CONFIG.personal.emailEncoded,
+            contactEmailText
+        );
+        
+        // Add security indicator class
+        contactEmail.classList.add('secure-contact-link');
+        contactEmail.setAttribute('data-security', 'pending');
+        
+        // Update security status when verified
+        const checkVerification = setInterval(() => {
+            if (ContactSecurity.isVerified()) {
+                contactEmail.setAttribute('data-security', 'verified');
+                clearInterval(checkVerification);
+            }
+        }, 1000);
+    } else if (contactEmail && CONFIG.personal.email) {
+        // Fallback to old method if emailEncoded not configured
+        console.warn('Using legacy email config. Consider upgrading to emailEncoded for better security.');
         const emailParts = CONFIG.personal.email.split('@');
         if (emailParts.length === 2) {
-            contactEmail.setAttribute('data-user', btoa(emailParts[0])); // Base64 encode
+            contactEmail.setAttribute('data-user', btoa(emailParts[0]));
             contactEmail.setAttribute('data-domain', btoa(emailParts[1]));
             contactEmail.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -242,8 +279,29 @@ function initializePersonalInfo() {
         }
     }
     
-    // Obfuscate phone number
-    if (contactPhone && CONFIG.personal.phone) {
+    // Phone setup with security
+    const contactPhone = document.getElementById('contact-phone');
+    const contactPhoneText = document.getElementById('contact-phone-text');
+    
+    if (contactPhone && CONFIG.personal.phoneEncoded) {
+        ContactSecurity.setupPhoneLink(
+            contactPhone,
+            CONFIG.personal.phoneEncoded,
+            contactPhoneText
+        );
+        
+        contactPhone.classList.add('secure-contact-link');
+        contactPhone.setAttribute('data-security', 'pending');
+        
+        const checkPhoneVerification = setInterval(() => {
+            if (ContactSecurity.isVerified()) {
+                contactPhone.setAttribute('data-security', 'verified');
+                clearInterval(checkPhoneVerification);
+            }
+        }, 1000);
+    } else if (contactPhone && CONFIG.personal.phone) {
+        // Fallback to old method if phoneEncoded not configured
+        console.warn('Using legacy phone config. Consider upgrading to phoneEncoded for better security.');
         contactPhone.setAttribute('data-phone', btoa(CONFIG.personal.phone));
         contactPhone.addEventListener('click', function(e) {
             e.preventDefault();
@@ -255,17 +313,12 @@ function initializePersonalInfo() {
         }
     }
     
+    // LinkedIn and GitHub (less sensitive)
+    const contactLinkedin = document.getElementById('contact-linkedin');
+    const contactGithub = document.getElementById('contact-github');
+    
     if (contactLinkedin) contactLinkedin.href = `https://linkedin.com/in/${CONFIG.personal.linkedin}`;
     if (contactGithub) contactGithub.href = `https://github.com/${CONFIG.personal.github}`;
-    
-    // Footer
-    const currentYear = document.getElementById('current-year');
-    const footerName = document.getElementById('footer-name');
-    const footerLocation = document.getElementById('footer-location');
-    
-    if (currentYear) currentYear.textContent = new Date().getFullYear();
-    if (footerName) footerName.textContent = CONFIG.personal.name;
-    if (footerLocation) footerLocation.textContent = CONFIG.personal.location;
 }
 
 // ========================================
@@ -409,49 +462,99 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 // ========================================
-// CONTACT FORM
+// SECURE CONTACT FORM
+// Enhanced with honeypots, timing checks, and interaction verification
 // ========================================
-function initializeContactForm() {
+function initializeSecureContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
     
-    // Obfuscate and set form action from config
+    // Decode and set form action
     if (CONFIG.contactForm && CONFIG.contactForm.formspreeId) {
-        // Decode the obfuscated form ID at runtime
-        const formId = atob(CONFIG.contactForm.formspreeId);
-        form.action = `https://formspree.io/f/${formId}`;
+        try {
+            const formId = atob(CONFIG.contactForm.formspreeId);
+            form.action = `https://formspree.io/f/${formId}`;
+        } catch(e) {
+            console.error('Invalid form configuration');
+            return;
+        }
     }
     
+    const submitBtn = form.querySelector('button[type="submit"]');
+    
+    // Add security status indicator
+    const securityStatus = document.createElement('div');
+    securityStatus.className = 'form-security-status pending';
+    securityStatus.innerHTML = '<span>Verifying you\'re human...</span>';
+    
+    if (submitBtn) {
+        submitBtn.parentNode.insertBefore(securityStatus, submitBtn.nextSibling);
+    }
+    
+    // Update status when verified
+    const updateStatus = setInterval(() => {
+        if (ContactSecurity.isVerified()) {
+            securityStatus.className = 'form-security-status verified';
+            securityStatus.innerHTML = '<span>Ready to send</span>';
+            clearInterval(updateStatus);
+        }
+    }, 500);
+    
+    // Enhanced form submission
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const statusDiv = document.getElementById('form-status');
-        const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.textContent;
         
-        // Check if form is configured
-        if (!CONFIG.contactForm || !CONFIG.contactForm.formspreeId || CONFIG.contactForm.formspreeId === 'YOUR_FORM_ID') {
-            statusDiv.textContent = '⚠️ Contact form not configured. Please update the Formspree ID in config.js';
+        // Security check
+        if (!ContactSecurity.isVerified()) {
+            statusDiv.textContent = '⚠️ Please interact with the page (scroll, click) before sending.';
             statusDiv.className = 'form-status error';
             statusDiv.classList.remove('hidden');
             return;
         }
         
-        // Check honeypot field (bot detection)
-        const honeypot = form.querySelector('input[name="_gotcha"]');
-        if (honeypot && honeypot.value !== '') {
-            // Silently reject - it's a bot
-            console.log('Bot detected via honeypot');
-            return;
+        // Check all honeypot fields
+        const honeypots = ['_gotcha', 'website', 'phone_confirm', 'fax'];
+        for (const hp of honeypots) {
+            const field = form.querySelector(`[name="${hp}"]`);
+            if (field && field.value !== '') {
+                console.log('Bot detected via honeypot');
+                // Fake success to confuse bot
+                statusDiv.textContent = '✓ Message sent!';
+                statusDiv.className = 'form-status success';
+                statusDiv.classList.remove('hidden');
+                return;
+            }
         }
         
-        // Disable button and show loading state
+        // Check timing
+        const timestampField = form.querySelector('[name="_timestamp"]');
+        if (timestampField) {
+            const elapsed = Date.now() - parseInt(timestampField.value);
+            const minTime = (CONFIG.contactForm && CONFIG.contactForm.minFormFillTime) || 3000;
+            if (elapsed < minTime) {
+                console.log('Form submitted too quickly');
+                statusDiv.textContent = '⚠️ Please take a moment to fill out the form.';
+                statusDiv.className = 'form-status error';
+                statusDiv.classList.remove('hidden');
+                return;
+            }
+        }
+        
+        // Disable button and show loading
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
         statusDiv.classList.add('hidden');
         
         try {
             const formData = new FormData(form);
+            
+            // Remove honeypot fields from submission
+            honeypots.forEach(hp => formData.delete(hp));
+            formData.delete('_timestamp');
+            
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -461,24 +564,23 @@ function initializeContactForm() {
             });
             
             if (response.ok) {
-                // Success
                 statusDiv.textContent = '✓ Thank you! Your message has been sent successfully.';
                 statusDiv.className = 'form-status success';
                 statusDiv.classList.remove('hidden');
                 form.reset();
+                
+                // Reset timestamp for next submission
+                if (timestampField) {
+                    timestampField.value = Date.now();
+                }
             } else {
-                // Error from server
-                statusDiv.textContent = '✗ Oops! There was a problem sending your message. Please try again.';
-                statusDiv.className = 'form-status error';
-                statusDiv.classList.remove('hidden');
+                throw new Error('Server error');
             }
         } catch (error) {
-            // Network error
-            statusDiv.textContent = '✗ Network error. Please check your connection and try again.';
+            statusDiv.textContent = '✗ Unable to send. Please try again or email directly.';
             statusDiv.className = 'form-status error';
             statusDiv.classList.remove('hidden');
         } finally {
-            // Re-enable button
             submitBtn.disabled = false;
             submitBtn.textContent = originalBtnText;
         }

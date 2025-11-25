@@ -1793,3 +1793,175 @@ footer p + p {
 :root.dark .highlight-card:hover {
     border-color: var(--primary-color);
 }
+
+/* ========================================
+   CONTACT SECURITY STYLES
+   Add this to your styles.css
+   ======================================== */
+
+/* Hide decoy characters inserted for bot confusion */
+.decoy-char {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Contact info reveal animation */
+.contact-info-hidden {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-info-hidden:hover,
+.contact-info-hidden.revealed {
+    filter: blur(0);
+}
+
+/* Click-to-reveal button style */
+.reveal-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reveal-contact-btn:hover {
+    border-color: var(--brand-color);
+    background: var(--brand-color);
+    color: white;
+}
+
+.reveal-contact-btn::before {
+    content: '🔒';
+}
+
+.reveal-contact-btn.revealed::before {
+    content: '🔓';
+}
+
+/* Honeypot fields - multiple hiding techniques */
+input[name="_gotcha"],
+input[name="website"],
+input[name="phone_confirm"],
+input[name="fax"],
+.hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    z-index: -1 !important;
+}
+
+/* Contact link security indicator */
+.secure-contact-link {
+    position: relative;
+}
+
+.secure-contact-link::after {
+    content: '🛡️';
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+    opacity: 0.6;
+}
+
+/* Loading state while verifying */
+.contact-verifying {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.contact-verifying::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--brand-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 0.5rem;
+}
+
+/* Security badge for contact section */
+.security-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.security-notice::before {
+    content: '🔐';
+    font-size: 1.25rem;
+}
+
+:root.dark .security-notice {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Progressive reveal based on interaction */
+.contact-link[data-security="pending"] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.contact-link[data-security="verified"] {
+    cursor: pointer;
+    opacity: 1;
+}
+
+/* CAPTCHA container styling */
+.captcha-container {
+    margin: var(--spacing-md) 0;
+}
+
+.captcha-container > div {
+    display: flex;
+    justify-content: center;
+}
+
+/* Form security indicator */
+.form-security-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+}
+
+.form-security-status.verified {
+    color: #10b981;
+}
+
+.form-security-status.verified::before {
+    content: '✓';
+}
+
+.form-security-status.pending::before {
+    content: '○';
+}
+
