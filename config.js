@@ -12,11 +12,21 @@ const CONFIG = {
         title: "Engineering Leadership · Systems at Scale",
         tagline: "Building & Scaling Innovative Products",
         location: "Montreal, Quebec, Canada",
-        email: "mazen.elbawab@gmail.com",
-        phone: "+1-514-992-3126",
+        emailEncoded: {
+            u: "YmF3YWJsZS5uZXphbQ==",
+            d: "bGlhbWc=",
+            t: "Y29t"
+        },
+        phoneEncoded: {
+            c: "MQ==",
+            a: "NTE0",
+            p: "OTky",
+            l: "MzEyNg=="
+        },
         linkedin: "mazenelbawab",  // Just the username
         github: "mazelb"            // Just the username
     },
+
 
     // ========================================
     // FEATURE TOGGLES
