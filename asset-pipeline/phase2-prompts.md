@@ -208,34 +208,91 @@ The hero is built entirely from pre-rendered frames — same visual language as 
 - **C2 — wave on load:** plays once when the page loads, then holds on the last frame.
 - **C1 — idle loop:** the resting state after the wave; loops subtly forever (breathing, slow blink, tablet-glow flicker).
 
-**2.2 Cursor "look" frames — 7 stills, edits of P1** · *attach approved P1 ONLY*
-A small head-angle set, swapped by cursor X-position to make him appear to track the pointer. Generate each as an edit of P1 (zero drift, identical body):
+**2.2 Cursor "look" frames — generate ONE side, mirror for the other**
+
+> **Why this is structured oddly:** image models (nano-banana included) can't reliably tell left from right — "his left" vs "viewer's right" comes out random no matter how precise the prompt. So **don't ask it for a direction.** Ask only for how *far* the head turns, let it pick a side, and get the opposite side by **horizontally mirroring** the result (CSS `transform: scaleX(-1)` at runtime — zero extra assets, perfectly symmetric).
+>
+> Generate the 3 blocks below as edits of P1. Whichever way the head ends up turned, save them as the `−` set; the build mirrors them for the `+` set. `look_0` (center) = P1. Net result on screen: 7 positions from 3 generations.
+>
+> Keep the turns **modest** — a full mirror also flips the body (tablet appears to swap hands) and the lighting (amber key swaps sides); at small magnitudes inside a fast cursor cross-fade that's imperceptible. (Purist option if it ever bothers you: regenerate this set head-and-shoulders under even lighting so there's nothing asymmetric to flip, and apply the amber/cyan grade as a fixed Phase-3 overlay.)
+
+**look_t1 — slight turn** · *attach P1 ONLY*
 ```text
-Edit this image — keep his body, pose, outfit, proportions, lighting and background EXACTLY the same. Change ONLY his head/neck angle and eye direction: he turns his head [ANGLE] and looks [DIRECTION]. Natural, subtle, friendly. No text, no extra characters.
+Edit this image — keep his body, pose, outfit, proportions, lighting and the background EXACTLY the same. Change ONLY his head/neck angle and eye direction: he turns his head a small amount to one side and his eyes glance the same way. Very subtle, natural, friendly. No text, no extra characters.
 ```
-Generate with these 7 [ANGLE]/[DIRECTION] values (filename → instruction):
-- `look_-3` → far left: "well to his right (viewer's left), eyes following"
-- `look_-2` → mid left: "to his right (viewer's left), eyes following"
-- `look_-1` → slight left: "slightly to his right (viewer's left)"
-- `look_0` → center (this is just P1 itself — reuse, no generation)
-- `look_+1` → slight right: "slightly to his left (viewer's right)"
-- `look_+2` → mid right: "to his left (viewer's right), eyes following"
-- `look_+3` → far right: "well to his left (viewer's right), eyes following"
 
-(Build maps to mirror naming: cursor far-left of screen → he looks toward it. These 7 frames cross-fade in JS; the idle loop C1 plays underneath when the cursor is still.)
+**look_t2 — medium turn** · *attach P1 ONLY*
+```text
+Edit this image — keep his body, pose, outfit, proportions, lighting and the background EXACTLY the same. Change ONLY his head/neck angle and eye direction: he turns his head a moderate amount to one side and his eyes follow the same way. Natural, subtle, friendly. No text, no extra characters.
+```
 
-**2.3 Parallax layers — 2–3 flat PNGs (optional, for depth):**
-Generate or composite a few background slabs that shift slightly against pointer movement: a soft amber lamp-glow blob, a faint cyan blueprint-grid panel, a dark workbench foreground edge. Each is a transparent PNG placed behind/in front of the character and translated a few px on mousemove. Keep them abstract and low-contrast — they suggest a workshop without competing with the character or the headline.
+**look_t3 — far turn** · *attach P1 ONLY*
+```text
+Edit this image — keep his body, pose, outfit, proportions, lighting and the background EXACTLY the same. Change ONLY his head/neck angle and eye direction: he turns his head a large amount to one side, as if watching something toward the edge, eyes looking the same way. Natural, friendly. No text, no extra characters.
+```
+
+*(If the three come out turned in different directions from each other, just horizontally flip the odd ones so all three face the same way before saving — then the build's mirror handles the opposite side. The 7 positions cross-fade in JS; idle loop C1 plays underneath when the cursor is still.)*
+
+**2.3 Parallax depth layers — 3 standalone images (optional)**
+
+> Soft slabs behind and in front of the character that shift a few px against the pointer for depth. **The trick that makes these composite cleanly:** generate the two *glow* layers on **pure solid black** and blend them in Phase 3 with `mix-blend-mode: screen` — under screen blend, black becomes invisible and only the glow shows, giving you clean "transparency" for free with **no cut-out / no rembg step** (rembg is only for the character mattes in §4). The backmost layer is just an opaque backdrop. Generate each large (~1920×1200, landscape) and low-contrast; they get scaled to cover and never compete with the character or headline.
+
+Stack, back → front:
+
+**bg_base — opaque backdrop (backmost, static or slowest parallax)** · *no attachment* · opaque
+```text
+A dark cinematic backdrop: deep ink-blue near-black (hex 0B0F1A) filling the whole frame, with a soft diffuse pool of warm amber lamplight glowing from the upper-left and falling off gently into shadow, heavy soft-focus, completely empty — no objects, no people, no text. Atmospheric, low contrast. Wide landscape.
+```
+
+**bg_blueprint — cyan grid glow (behind the character; screen-blended)** · *no attachment* · **generate on PURE BLACK**
+```text
+On a pure solid black background: a faint, thin, softly glowing cyan technical blueprint — a light grid plus a few delicate schematic line-drawings — low density, drifting toward the right side of the frame, abstract and unreadable. Only thin glowing cyan lines on black and nothing else; no solid shapes, no text. Subtle, digital. Wide landscape.
+```
+> Composite with `mix-blend-mode: screen` → the black drops out, only the cyan glow remains.
+
+**fg_motes — drifting light specks (in front of the character; fastest parallax)** · *no attachment* · **generate on PURE BLACK**
+```text
+On a pure solid black background: a sparse scattering of small, soft, out-of-focus glowing bokeh specks and fine dust motes in warm amber and pale cyan, varying sizes, mostly across the lower half of the frame, heavy soft-focus. Only glowing specks on black and nothing else; no text, no objects. Dreamy, subtle, cinematic. Wide landscape.
+```
+> Composite with `mix-blend-mode: screen`, as the front layer with the largest parallax shift.
+>
+> *Prefer a literal workbench edge over motes for the foreground? Generate a dark, blurred workbench surface with a couple of tool silhouettes filling only the bottom ~20% of the frame, place it as the front layer, and fade its top edge with a CSS mask (`mask-image: linear-gradient(to top, black, transparent)`) so it melts into the dark page. A dark occluder can't use screen blend, so it needs the mask instead.*
 
 **Assembly notes for Phase 3:**
-- Static poster (P1, the `look_0` frame) is the instant-load placeholder; C2/C1 lazy-load and take over once decoded.
+- Static poster (P1, the center/`look_0` position) is the instant-load placeholder; C2/C1 lazy-load and take over once decoded.
 - `prefers-reduced-motion`: show P1 only, no wave, no idle, no cursor tracking.
 - Mobile: P1 poster + one gentle idle loop, no cursor tracking (no pointer).
 - Total hero payload target: poster + look-set + one idle loop ≤ ~600 KB after AVIF.
 
 ---
 
-## 3 · SEEDANCE CLIP PROMPTS — each block is complete; attach the listed pose still
+## 3 · CLIP PROMPTS (Seedance / Veo) — each block is complete; attach the listed seed still
+
+> ### Working with the models (READ FIRST — these tools do NOT obey prompts precisely)
+> Image-to-video is "best-effort continuation," not controllable animation. Don't fight it; design around it. Five rules that resolve the common failures:
+>
+> 1. **Scrub clips don't need to loop — so stop asking for loops.** Most clips are scroll-scrubbed: scroll down plays them forward, scroll up plays them backward, so they're seamless *by definition*. The "first and last frame identical" instruction was confusing the model for no benefit — it's been removed from every scrubbed clip. **Only true autoplay loops** (hero idle C1, reading nook C14, blueprint C12, wrench-polish C17) need seamlessness, and those get it in post via **boomerang** (forward+reverse, §4.6) — which is *always* seamless regardless of what the model returns. Never rely on the model to match frames.
+> 2. **Seed from the START of the motion (a rest pose), not the climax.** This is why the wave glitched: P2 already has the hand up, so "raise then lower" had nowhere to go. Seed round-trip motions (wave, lift-and-place) from **P1 / a neutral standing pose** and describe the full action forward. Continuation motions (soldering, reading) can seed from their active pose since they don't return.
+> 3. **Never say "walks in / enters / appears."** The character is already in the seed image; an entrance instruction makes the model spawn a SECOND character (the duplicate-idle bug). Phrase every action as the *existing* subject continuing: "the man in the image walks toward the right," not "a character walks in."
+> 4. **Don't fight duration.** If Veo gives 10s when you asked for 5, let it — you'll **trim to the clean sub-range in ffmpeg** (§4.1) and sample frames from there. Duration non-compliance is a non-issue once the raw clip is just raw material.
+> 5. **One motion per clip.** Compound actions ("lifts, places, steps back, nods") are where it melts. Ask for the single most important beat; cut the rest. Shorter, simpler prompts survive far better.
+>
+> If a clip still fights you after 2–3 tries, it's a candidate to become a **still + GSAP** beat instead of video (see the note at the end of §3) — that's often the right answer, not more re-rolls.
+
+> ### ✅ BUILD SET — generate ONLY these 8 clips (decided 2026-06)
+> Scope set to "journey-rich." Generate as video **only** the clips where body motion is the point:
+> | Clip | Beat | Seed |
+> |---|---|---|
+> | **C1** | hero idle (boomerang loop) | P1 |
+> | **C2** | hero wave on load | **P1** (rest, not P2) |
+> | **C3** | walk through eras | P3 |
+> | **C6** | Heddoko — solder, lights ignite | P5 |
+> | **C7** | garage → next transition | P6 |
+> | **C8** | Brex — threads flow | P8 |
+> | **C10** | Ubisoft — org chart assembles | P7 |
+> | **C11** | companion birth (the thesis beat) | P9 |
+>
+> **Every other C-clip below (C4, C5, C9, C12–C20) is NOT generated as video** — those beats become **pose-still + GSAP** (articles, highlights wall, contact card, reading nook, etc.). They're kept in this doc only as reference in case a still beat later wants promoting to video. Don't spend time on them now.
 
 Background classes (already written into each prompt):
 - **MATTE** = plain light-grey studio → background removed per-frame afterward (section 4.2), composited over the page.
@@ -245,22 +302,23 @@ Background classes (already written into each prompt):
 
 **C1 — hero idle (MATTE · LOOP)** · *attach P1*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: subtle breathing idle — gentle weight shift, the cyan tablet's glow flickers softly, one slow blink, an occasional small head turn. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 5 seconds, smooth 24fps motion, loopable: first and last frame identical pose. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: subtle breathing idle — gentle weight shift, the cyan tablet's glow flickers softly, one slow blink, an occasional small head turn. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
-**C2 — hero wave (MATTE)** · *attach P2*
+**C2 — hero wave (MATTE)** · *attach **P1** (rest pose, arms down — NOT P2; seeding from the raised hand is what glitched)*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: raises his right hand and gives one friendly wave, then lowers the hand and settles into a relaxed standing pose. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. The man starts with his arms relaxed at his sides as in the image. Action: he raises his right hand and gives one friendly wave. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~3 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
+*(In the hero, this plays once on load and cross-fades into the C1 idle — no need for the wave to return to rest itself.)*
 
 **C3 — walk cycle (MATTE · LOOP)** · *attach P3*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: walks left-to-right in exact side profile at a relaxed confident pace, natural arm swing, slight bounce in his step, carrying the glowing cyan tablet. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 5 seconds, smooth 24fps motion, loopable: first and last frame identical mid-stride pose. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: walks left-to-right in exact side profile at a relaxed confident pace, natural arm swing, slight bounce in his step, carrying the glowing cyan tablet. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
-**C5 — card construction (MATTE)** · *attach P4*
+**C5 — card construction (MATTE)** · *attach **P1** (standing — action starts from rest, not the mid-lift of P4)*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: crouches, lifts the glowing translucent panel with slight effort, places it upright in front of him, steadies it with both hands, then steps back half a step and gives a satisfied nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. The man stands relaxed as in the image. Action: a glowing translucent panel rises up in front of him and he steadies it with both hands. (One motion only — no crouch, no step-back.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
 **C6 — Heddoko garage (SCENE)** · *attach P5*
@@ -270,7 +328,7 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 
 **C8 — Brex tower (SCENE)** · *attach P8*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a sleek dark fintech office at night, floor-to-ceiling windows, thin teal-blue threads of light flowing across a faint world map etched in fine line-work in the air. Action: he walks in from the left carrying a glowing card-sized hologram, slides it into a floating slot of cyan light; the light-threads across the map brighten and multiply; he watches them flow with calm satisfaction. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a sleek dark fintech office at night, floor-to-ceiling windows, thin teal-blue threads of light flowing across a faint world map etched in fine line-work in the air. Action: the man already in the image slides the glowing card-sized hologram he is holding into a floating slot of cyan light; the light-threads across the map brighten and multiply; he watches them flow with calm satisfaction. (He is already present — do NOT add or introduce a second person.) Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no extra characters.
 ```
 
 **C10 — Ubisoft studio (SCENE)** · *attach P7*
@@ -312,7 +370,7 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 
 **C14 — reading nook ambient (SCENE · LOOP)** · *attach P10*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a cozy reading nook — a drafting table, a single warm lamp, dark backdrop. Action: seated, calmly reading a glowing page; turns a page every couple of seconds; one slow blink; ambient and peaceful. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion, loopable: first and last frame identical pose. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a cozy reading nook — a drafting table, a single warm lamp, dark backdrop. Action: seated, calmly reading a glowing page; turns a page every couple of seconds; one slow blink; ambient and peaceful. Camera: locked-off, no camera movement, no zoom. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
 **C16 — pin frame to wall (MATTE)** · *attach P11*
@@ -329,12 +387,12 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 
 **C4 — toolbox set-down (MATTE)** · *attach P1*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: walks in from the left edge of the frame carrying a worn metal toolbox, sets it down, flips it open; a soft amber glow rises from inside; he looks up, ready to work. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: the man already in the image opens a worn metal toolbox in front of him; a soft amber glow rises from inside; he looks up, ready to work. (He is already present — do NOT add or introduce a second person.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion. No text, no extra characters.
 ```
 
 **C12 — blueprint collaboration (SCENE · LOOP)** · *attach P9*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: close on a drafting board in warm lamplight, dark backdrop. Action: the small cyan gemstone companion projects thin cyan sketch-lines onto the blueprint just ahead of his pencil; he adjusts one of the lines; they exchange a brief glance. Camera: locked-off, no camera movement, no zoom. Duration 4 seconds, smooth 24fps motion, loopable: first and last frame identical pose. No text, no other characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: close on a drafting board in warm lamplight, dark backdrop. Action: the small cyan gemstone companion projects thin cyan sketch-lines onto the blueprint just ahead of his pencil; he adjusts one of the lines; they exchange a brief glance. Camera: locked-off, no camera movement, no zoom. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no other characters.
 ```
 
 **C15 — slide article card (MATTE)** · *attach P10*
@@ -344,14 +402,31 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 
 **C17 — wrench polish idle (MATTE · LOOP)** · *attach P1*
 ```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: leans one elbow on an invisible shelf at hip height, polishing the small steel wrench with a cloth, relaxed, occasionally glancing toward the camera. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion, loopable: first and last frame identical pose. No text, no extra characters.
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: leans one elbow on an invisible shelf at hip height, polishing the small steel wrench with a cloth, relaxed, occasionally glancing toward the camera. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
+
+### When a clip isn't worth the fight — make it a still + GSAP beat instead
+
+Video is the unreliable, expensive asset; the pose stills are proven and gorgeous. You do **not** need every beat to be video. A still animated by scroll (GSAP/Lenis) is often *more* elegant than a glitchy clip and costs minutes, not hours. Convert a beat to still + motion when the "action" is really just an effect *around* a mostly-still character:
+
+- **The character barely moves** → use the pose still; animate the *environment* (igniting solder lights, flowing cyan threads, the org-chart nodes, blueprint lines) as GSAP/CSS/canvas layers over the still. The blueprint-line motif already does exactly this.
+- **A reveal or hand-off** (cards sliding in, frames pinning to the wall, the business card extending) → still + transform/opacity on scroll. No video needed.
+- **Entrances/exits** → parallax-translate the still across the frame instead of asking the model to walk him in (which spawns duplicates anyway).
+
+**The decided build set is the 8 clips listed in the ✅ box at the top of §3** (C1, C2, C3, C6, C7, C8, C10, C11). Everything else is still + GSAP. This is also better for the 60fps / Lighthouse / payload gates.
 
 ---
 
 ## 4 · FFMPEG / MATTING — clip → frame sequences
 
 Directory convention: `assets/seq/<clipId>/<profile>/frame_%03d.avif`
+
+### 4.0 Trim to the clean range first (do this before anything else)
+The models over-run duration and often have a glitchy first/last beat. Cut the good sub-range — this also fixes "Veo gave me 10s." Scrub through, note the in/out seconds, then:
+```bash
+ffmpeg -ss 1.2 -to 5.8 -i C06_raw.mp4 -c:v libx264 -crf 16 C06.mp4   # keep 1.2s–5.8s
+```
+Use the trimmed `C06.mp4` for every step below. Trimming away a bad entrance/exit beat is usually faster than re-generating.
 
 ### 4.1 Extract scrub frames
 A 5s/24fps clip has 120 frames; we keep 28 (desktop) / 14 (mobile), evenly sampled:
@@ -391,11 +466,16 @@ du -sh assets/seq/*/d | sort -h
 ```
 If a SCENE sequence overshoots: raise `--min/--max` by 4 and re-check banding on the dark areas (grain in frame hides most of it).
 
-### 4.5 Loop QA (LOOP clips)
+### 4.5 Scrubbed clips — no loop needed
+Scroll-scrubbed clips (the journey beats, walk, card actions, contact) are seamless by construction: scroll down = forward, scroll up = reverse. Do nothing special — just extract frames (4.1) and the scrubber handles both directions.
+
+### 4.6 Boomerang for the 4 autoplay loops (C1, C14, C12, C17)
+Only the clips that play on their own need a seamless loop. Don't ask the model for it — make it with forward+reverse, which is *always* seamless:
 ```bash
-ffmpeg -i C01.mp4 -vf "select='eq(n,0)+eq(n,119)',tile=2x1" -frames:v 1 loopcheck_C01.png
+# Video boomerang (forward then reverse), then feed THIS into 4.1
+ffmpeg -i C01.mp4 -filter_complex "[0:v]reverse[r];[0:v][r]concat=n=2:v=1[v]" -map "[v]" C01_boom.mp4
 ```
-First/last frames must match; if not, trim the clip ends before 4.1.
+Or, equivalently, in the build: play the extracted frame sequence 0→N then N→0. Trim each loop clip (4.0) to a stretch with no big head-position jump first, so the turnaround at the ends is gentle.
 
 ---
 
