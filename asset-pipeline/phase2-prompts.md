@@ -298,9 +298,11 @@ Background classes (already written into each prompt):
 - **MATTE** = plain light-grey studio → background removed per-frame afterward (section 4.2), composited over the page.
 - **SCENE** = full environment baked in → shown inside a contained 16:9 stage, no matting.
 
-### Tier 1 — must-have
+### The 8 build clips — generate these, in order
 
-**C1 — hero idle (MATTE · LOOP)** · *attach P1*
+Seeds and beats match the ✅ box above. Boomerang the loops in post (§4.6); everything else is scroll-scrubbed (no loop needed).
+
+**C1 — hero idle (MATTE · autoplay loop → boomerang)** · *attach P1*
 ```text
 Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: subtle breathing idle — gentle weight shift, the cyan tablet's glow flickers softly, one slow blink, an occasional small head turn. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
@@ -311,19 +313,19 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 ```
 *(In the hero, this plays once on load and cross-fades into the C1 idle — no need for the wave to return to rest itself.)*
 
-**C3 — walk cycle (MATTE · LOOP)** · *attach P3*
+**C3 — walk through eras (MATTE · scrubbed)** · *attach P3*
 ```text
 Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: walks left-to-right in exact side profile at a relaxed confident pace, natural arm swing, slight bounce in his step, carrying the glowing cyan tablet. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
-```
-
-**C5 — card construction (MATTE)** · *attach **P1** (standing — action starts from rest, not the mid-lift of P4)*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. The man stands relaxed as in the image. Action: a glowing translucent panel rises up in front of him and he steadies it with both hands. (One motion only — no crouch, no step-back.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
 **C6 — Heddoko garage (SCENE)** · *attach P5*
 ```text
 Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a dim garage workshop at night, a single warm tungsten work lamp, a workbench with a sewing machine and hand tools, a dark mannequin torso wearing a smart-fabric garment. Action: he solders a connection on the fabric; tiny amber points of light ignite one by one across the garment on the mannequin; he looks up at it with quiet pride. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C7 — garage → next transition (SCENE)** · *attach P6*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: the edge of the dim garage workshop, warm lamplight fading toward the right side of the frame. Action: he lifts glowing amber data points from a smart-fabric garment; they drift together and compress between his hands into a single glowing card-sized hologram; he looks at it, then carries it as he walks toward the right edge of the frame. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no extra characters.
 ```
 
 **C8 — Brex tower (SCENE)** · *attach P8*
@@ -339,70 +341,6 @@ Animate this exact 3D Pixar-style character, preserving his face, glasses, beard
 **C11 — companion birth (SCENE)** · *attach P9*
 ```text
 Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: the same dark game-studio room, darker now, monitors glowing softly. Action: the glow from the monitors condenses into a swirl of cyan light that forms into a small floating companion — a fist-sized irregular translucent polyhedron like a cut gemstone with a bright core and two simple friendly curved eyes; it bobs once and settles beside his right shoulder; he turns and smiles at it. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no other characters.
-```
-
-**C18 — turn to camera (MATTE)** · *attach T2 (¾ view)*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: from a relaxed three-quarter stance he turns to face the camera squarely, and his expression warms into a genuine smile. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C19 — business card extend (MATTE)** · *attach P12*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: extends a small blank business card toward the viewer with warmth and confidence, then holds it steady. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-### Tier 2 — strongly wanted
-
-**C7 — garage exit transition (SCENE)** · *attach P6*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: the edge of the dim garage workshop, warm lamplight fading toward the right side of the frame. Action: he lifts glowing amber data points from a smart-fabric garment; they drift together and compress between his hands into a single glowing card-sized hologram; he looks at it, then carries it as he walks toward the right edge of the frame. Camera: locked-off, no camera movement, no zoom. Duration 5 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C9 — follow the light thread (MATTE)** · *attach P3*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: a thin thread of teal light drifts from left to right ahead of him; he follows it, walking at a curious, confident pace, eyes on the light. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C13 — journey pin-out (SCENE)** · *attach P9*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: the dark studio, all lights dimming except one warm lamp. Action: he and the small cyan gemstone companion at his shoulder walk toward the camera and pass below the bottom of the frame, the companion bobbing gently as they go. Camera: locked-off, no camera movement, no zoom. Duration 3 seconds, smooth 24fps motion. No text, no other characters.
-```
-
-**C14 — reading nook ambient (SCENE · LOOP)** · *attach P10*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a cozy reading nook — a drafting table, a single warm lamp, dark backdrop. Action: seated, calmly reading a glowing page; turns a page every couple of seconds; one slow blink; ambient and peaceful. Camera: locked-off, no camera movement, no zoom. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
-```
-
-**C16 — pin frame to wall (MATTE)** · *attach P11*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: takes a brass-cornered picture frame from under his arm, pins it to an invisible wall at head height, straightens it with two fingers, and gives a satisfied nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C20 — nod sign-off (MATTE)** · *attach P12 (and mention companion)*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely, including the small cyan gemstone companion hovering at his right shoulder. Action: he gives a single warm nod to the camera; the companion bobs once in sync with the nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character and companion fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no other characters.
-```
-
-### Tier 3 — polish
-
-**C4 — toolbox set-down (MATTE)** · *attach P1*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: the man already in the image opens a worn metal toolbox in front of him; a soft amber glow rises from inside; he looks up, ready to work. (He is already present — do NOT add or introduce a second person.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C12 — blueprint collaboration (SCENE · LOOP)** · *attach P9*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: close on a drafting board in warm lamplight, dark backdrop. Action: the small cyan gemstone companion projects thin cyan sketch-lines onto the blueprint just ahead of his pencil; he adjusts one of the lines; they exchange a brief glance. Camera: locked-off, no camera movement, no zoom. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no other characters.
-```
-
-**C15 — slide article card (MATTE)** · *attach P10*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: seated, slides a glowing translucent card across an invisible table surface toward the camera with two fingers, then looks up with a friendly nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
-```
-
-**C17 — wrench polish idle (MATTE · LOOP)** · *attach P1*
-```text
-Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: leans one elbow on an invisible shelf at hip height, polishing the small steel wrench with a cloth, relaxed, occasionally glancing toward the camera. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
 ```
 
 ### When a clip isn't worth the fight — make it a still + GSAP beat instead
@@ -486,6 +424,72 @@ Or, equivalently, in the build: play the extracted frame sequence 0→N then N�
 - [ ] Era variants (P5–P8) recognizable as the same man
 - [ ] Companion reads as tool-like, not cute
 - [ ] Hero look-frames (§2.2): head turns read smoothly L→R, identical body in all 7
-- [ ] Tier-1 clips: no morphing faces, no melted hands, loops verified
+- [ ] The 8 build clips: no morphing faces, no melted hands, boomerang loops seamless
 - [ ] Matted sequences clean over #0B0F1A
 - [ ] OG image legible at 600px wide
+
+---
+
+## ANNEX — Deferred clips (NOT in the build set)
+
+These beats are **not generated as video** for this build — they become **pose-still + GSAP/canvas** instead (see "When a clip isn't worth the fight" in §3). Kept here only as reference, in case one is later promoted back to video. If you do generate one, apply all the §3 rules (seed from rest, no entrances, trim duration, boomerang any loop).
+
+**C4 — toolbox set-down (MATTE)** · *attach P1*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: the man already in the image opens a worn metal toolbox in front of him; a soft amber glow rises from inside; he looks up, ready to work. (He is already present — do NOT add or introduce a second person.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 4 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C5 — card construction (MATTE)** · *attach **P1** (standing — action starts from rest, not the mid-lift of P4)*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. The man stands relaxed as in the image. Action: a glowing translucent panel rises up in front of him and he steadies it with both hands. (One motion only — no crouch, no step-back.) Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
+```
+
+**C9 — follow the light thread (MATTE)** · *attach P3*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: a thin thread of teal light drifts from left to right ahead of him; he follows it, walking at a curious, confident pace, eyes on the light. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C12 — blueprint collaboration (SCENE · autoplay loop → boomerang)** · *attach P9*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: close on a drafting board in warm lamplight, dark backdrop. Action: the small cyan gemstone companion projects thin cyan sketch-lines onto the blueprint just ahead of his pencil; he adjusts one of the lines; they exchange a brief glance. Camera: locked-off, no camera movement, no zoom. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no other characters.
+```
+
+**C13 — journey pin-out (SCENE)** · *attach P9*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: the dark studio, all lights dimming except one warm lamp. Action: he and the small cyan gemstone companion at his shoulder walk toward the camera and pass below the bottom of the frame, the companion bobbing gently as they go. Camera: locked-off, no camera movement, no zoom. Duration 3 seconds, smooth 24fps motion. No text, no other characters.
+```
+
+**C14 — reading nook ambient (SCENE · autoplay loop → boomerang)** · *attach P10*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Scene: a cozy reading nook — a drafting table, a single warm lamp, dark backdrop. Action: seated, calmly reading a glowing page; turns a page every couple of seconds; one slow blink; ambient and peaceful. Camera: locked-off, no camera movement, no zoom. Duration ~5 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
+```
+
+**C15 — slide article card (MATTE)** · *attach P10*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: seated, slides a glowing translucent card across an invisible table surface toward the camera with two fingers, then looks up with a friendly nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C16 — pin frame to wall (MATTE)** · *attach P11*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: takes a brass-cornered picture frame from under his arm, pins it to an invisible wall at head height, straightens it with two fingers, and gives a satisfied nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C17 — wrench polish idle (MATTE · autoplay loop → boomerang)** · *attach P1*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: leans one elbow on an invisible shelf at hip height, polishing the small steel wrench with a cloth, relaxed, occasionally glancing toward the camera. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration ~4 seconds (trim in post if longer), smooth 24fps motion. No text, no extra characters.
+```
+
+**C18 — turn to camera (MATTE)** · *attach T2 (¾ view)*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: from a relaxed three-quarter stance he turns to face the camera squarely, and his expression warms into a genuine smile. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C19 — business card extend (MATTE)** · *attach P12*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely. Action: extends a small blank business card toward the viewer with warmth and confidence, then holds it steady. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no extra characters.
+```
+
+**C20 — nod sign-off (MATTE)** · *attach P12 (and mention companion)*
+```text
+Animate this exact 3D Pixar-style character, preserving his face, glasses, beard, outfit, proportions and rendering style precisely, including the small cyan gemstone companion hovering at his right shoulder. Action: he gives a single warm nod to the camera; the companion bobs once in sync with the nod. Camera: locked-off, no camera movement, no zoom. Background: plain seamless light-grey studio background, character and companion fully separated from the background, soft contact shadow only. Duration 3 seconds, smooth 24fps motion. No text, no other characters.
+```
