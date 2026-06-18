@@ -14,5 +14,5 @@ Thumbs.db
 *.swo
 *~
 
-# Asset pipeline — rejected/scratch generations (not versioned)
-asset-pipeline/images/non-approved/
+# Asset pipeline — rejected/scratch generations (not versioned), per-version
+asset-pipeline/images/**/non-approved/
